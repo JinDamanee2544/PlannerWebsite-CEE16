@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Planner</title>
+        <link rel="stylesheet" href="style.css">
+        <script type="module" src="script.js"></script>
+    </head>
+    <body>
+        <section class="section-head">
+                <h1>Course Planner</h1>
+        </section>
+        <section class="section-table">
+            <table>
+                <tr>
+                    <th style="width: 10%;">Day</th>
+                    <th>Morning</th>
+                    <th>Evening</th>
+                </tr>
+                <tr>
+                    <td>Monday</td>
+                    <td>Algo</td>
+                    <td>CEM</td>
+                </tr>
+                <tr>
+                    <td>Tuesday</td>
+                </tr>
+                <tr>
+                    <td>Wednesday</td>
+                </tr>
+                <tr>
+                    <td>Thursday</td>
+                </tr>
+                <tr>
+                    <td>Friday</td>
+                </tr>
+            </table>
+        </section>
+        <section class="section-editpanel">
+            <div>
+                <h1>Edit - Panel (BETA) </h1>
+                <p>For inserting new subject into data base </p>
+
+                <label>Subject Name</label>
+                <input id="subjectName" type="text">
+
+                <label>Subject ID</label>
+                <input id="subjectID" type="text">
+
+                <br>
+                <label>Section</label>
+                <input id="section" type="text">
+
+                <label>instructor Name</label>
+                <input id="instructorName" type="text">
+
+                <label>Classroom</label>
+                <input id="classroom" type="text">
+            </div>
+            <div>
+                <p>Time detail</p>
+                <label>number of course in each week</label>
+                <select name="#course" id="courseCnt">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+
+                <br>
+                <div id="timeDetail">
+                    <!--waiting for dropdown input to add automatically-->
+                </div>
+                <button id="addItemBtn">AddItem</button>
+            </div>
+        </section>
+        <section>
+            <button id="test">Test</button>
+        </section>
+    </body>
+</html>
