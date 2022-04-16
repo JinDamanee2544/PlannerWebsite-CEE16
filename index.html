@@ -6,9 +6,9 @@
         <script type="module" src="script.js"></script>
     </head>
     <body>
-        <section class="section-head">
-                <h1>Course Planner</h1>
-        </section>
+        <header>
+            <h1>Course Planner</h1>
+        </header>
         <section class="section-table">
             <table>
                 <tr>
@@ -36,8 +36,10 @@
             </table>
         </section>
         <section class="section-editpanel">
-            <div>
-                <h1>Edit - Panel (BETA) </h1>
+            <div class="subHeader">
+                Edit - Panel (BETA)
+            </div>
+            <div class="content">
                 <p>For inserting new subject into data base </p>
 
                 <label>Subject Name</label>
@@ -56,7 +58,7 @@
                 <label>Classroom</label>
                 <input id="classroom" type="text">
             </div>
-            <div>
+            <div class="content">
                 <p>Time detail</p>
                 <label>number of course in each week</label>
                 <select name="#course" id="courseCnt">
@@ -70,10 +72,12 @@
                     <!--waiting for dropdown input to add automatically-->
                 </div>
                 <button id="addItemBtn">AddItem</button>
+                <button id="test">Check DataBase (For Testing)</button>
             </div>
         </section>
-        <section>
-            <button id="test">Test</button>
-        </section>
+        <br>
+        <footer>
+            <h1>Created by Group 16 - Due to Comp Eng Ess Project</h1>
+        </footer>
     </body>
 </html>

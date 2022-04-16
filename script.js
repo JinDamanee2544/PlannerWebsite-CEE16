@@ -38,8 +38,8 @@ var CourseWeeklyGlobal = 1;
 
 
 
-async function test(){
-    console.log('test');
+async function checkDataBase(){
+    console.log('CheckDatabase');
     const items = await getDocs(subjectRef)
     //console.log(items);
     if(items){
@@ -156,7 +156,7 @@ async function deleteItem() {
 */
 
 // Binding Func with btn
-document.getElementById('test').addEventListener('click',test)
+document.getElementById('test').addEventListener('click',checkDataBase)
 document.getElementById('courseCnt').addEventListener('change',timeAdd)
 document.getElementById('addItemBtn').addEventListener('click',addItem)
 
