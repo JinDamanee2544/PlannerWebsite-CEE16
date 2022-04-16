@@ -102,7 +102,7 @@ function addItem(){
         timeMap[dayInput]={start:startInput,end:endInput}        
     }
 
-    console.log(timeMap);
+    //console.log(timeMap);
     
     addDoc(subjectRef,{
         classroom,
