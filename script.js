@@ -113,9 +113,40 @@ function addItem(){
         console.log("Add successfully");
     } else {
         alert("Please fill all content below before submit your data")
+        console.log("Fail");
     }
-    
-    
+}
+function tableGenerator(){
+    const tableContainer = document.getElementById('tableTest')
+    const table = document.createElement('table')
+    // ----------- head --------------// 
+    const headRow = document.createElement('tr')
+    const headDayTime = document.createElement('th')
+    headDayTime.innerHTML = 'Day/Time'
+    headRow.appendChild(headDayTime)
+    for(let idx=8;idx<=16;idx++){
+        const headCol = document.createElement('th')
+        headCol.id = 'headCol'+idx
+        headCol.innerHTML = idx
+        headRow.appendChild(headCol)
+    }
+    table.append(headRow)
+    // ----------- content row --------------// 
+    const day = ['MON','TUE','WED','THU','FRI']
+    for(let idx=0;idx<5;idx++){
+        const contentRow = document.createElement('tr')
+        var thisDay = day[idx]
+        const dayCol = document.createElement('td')
+        dayCol.innerHTML = thisDay
+        contentRow.appendChild(dayCol)
+        table.appendChild(contentRow)
+        for(let idx=0;idx<9;idx++){
+            const contentCol = document.createElement('td')
+            contentCol.innerHTML=''
+            contentRow.appendChild(contentCol)
+        }
+    }
+    tableContainer.appendChild(table)
 }
 /*
 async function updateItem() {
@@ -165,3 +196,4 @@ document.getElementById('addItemBtn').addEventListener('click',addItem)
 
 // Starting Func when starting up website
 timeAdd()
+tableGenerator()

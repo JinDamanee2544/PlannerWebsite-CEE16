@@ -35,12 +35,12 @@ header h1,footer h1{
     font-size: 32px;
 }
 section{
-    display: inline-flexbox;
+    display: flex;
+    flex-direction: row;
     border-radius: 10px;
-    
-    margin: 10px 0;
+    margin: 10px 10px;
     padding: 10px 10px;
-    
+    justify-content: center;
 }
 input{
     width : 100px;
@@ -58,39 +58,39 @@ button:hover{
     transition: 0.3s;
 }
 .subHeader{
-    background-color: #1bb270;
+    display: flex;
+    align-items: center;
     text-align: center;
+    background-color: #1bb270;
     color : #fff;
     padding: 10px 10px;
     font-size: 24px;
 }
 .content{
-    margin: 20px 20px;
+    margin: 10px 10px;
 }
 /* --------------------- Table --------------------- */
 .section-table{
     display: flex;
-    justify-content: center;
 }
 table{
     background-color: rgb(240, 240, 240);
     width: 80%;
     border-collapse: collapse;
-    border : 1px solid;
 }
 table td,th{
-    border : 1px solid;
+    border : solid 1px #bcbcbc;
     padding : 10px 10px;
+    text-align: center;
 }
 table th{
     background-color:  #1bb270;
     color: #fff;
-    border-color: black;
+    border-color: #000000;
 }
 /* --------------------- Edit panel --------------------- */
 .section-editpanel{
-    padding : 10px 50px;
-    padding-left: 10%;
+    padding : 10px 10px;
 }
 .section-editpanel input{
     background-color: rgb(228, 228, 228);
