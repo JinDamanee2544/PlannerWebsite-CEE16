@@ -53,6 +53,10 @@ button{
     background-color: #1bb270;
     color: #FFF;
 }
+button:hover{
+    background-color: #0d9b5d;
+    transition: 0.3s;
+}
 .subHeader{
     background-color: #1bb270;
     text-align: center;

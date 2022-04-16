@@ -36,8 +36,6 @@ const subjectRef = collection(db, 'subjects');
 var CourseWeeklyGlobal = 1;
 
 
-
-
 async function checkDataBase(){
     console.log('CheckDatabase');
     const items = await getDocs(subjectRef)
@@ -103,16 +101,21 @@ function addItem(){
     }
 
     //console.log(timeMap);
+    if(classroom && instructorName && section && subjectID && subjectName && timeMap){
+        addDoc(subjectRef,{
+            classroom,
+            instructorName,
+            section,
+            subjectID,
+            subjectName,
+            timeMap                 // <-------------- Problem Here : Can't push Map in database. Pls someone Help!
+        })
+        console.log("Add successfully");
+    } else {
+        alert("Please fill all content below before submit your data")
+    }
     
-    addDoc(subjectRef,{
-        classroom,
-        instructorName,
-        section,
-        subjectID,
-        subjectName,
-        timeMap                 // <-------------- Problem Here : Can't push Map in database. Pls someone Help!
-    })
-    console.log("Add successfully");
+    
 }
 /*
 async function updateItem() {
