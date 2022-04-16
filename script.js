@@ -93,16 +93,15 @@ function addItem(){
     const instructorName = document.getElementById('instructorName').value
     const classroom = document.getElementById('classroom').value
     
-    const timeMap = new Map()
+    const timeMap = {}
     for (let index = 1; index <= CourseWeeklyGlobal; index++) {
         var dayInput = document.getElementById(`dayInput${index}`).value
         var startInput = document.getElementById(`startInput${index}`).value
         var endInput = document.getElementById(`endInput${index}`).value
 
-        var arrayTime = [startInput,endInput]
-        
-        timeMap.set(dayInput,arrayTime)
+        timeMap[dayInput]={start:startInput,end:endInput}        
     }
+
     console.log(timeMap);
     
     addDoc(subjectRef,{
