@@ -23,6 +23,8 @@ import {
     getDocs,
     getFirestore,
     updateDoc,
+    where,
+    query,
 } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js';
 
 // ======================================================= //
@@ -48,6 +50,48 @@ async function checkDataBase(){
         console.log(subject);
     }
 }
+async function search(){
+    console.log('search');
+    const searchName = document.getElementById('searchSubjectName').value
+    const searchID = document.getElementById('searchSubjectID').value
+    console.log(searchName + ' ' + searchID);
+    /*
+    if(!searchName || !searchID){ // Catch Error
+        alert('Pls fill before submit your search')
+        console.log('searchFail');
+    }
+    */
+    const foundIDref = query(subjectRef, where('subjectID', '==', `${searchID}`));
+    const queryID = await getDocs(foundIDref)
+    const searchList = [] // array of data array - 2D array
+    if(queryID){
+        const queryMap = queryID.docs.map(item=>({
+            ...item.data()
+        }))
+        if(queryMap.length==0) {
+            console.log('Not found');
+            alert('Not found')
+        } else {
+            searchList.push(queryMap)
+        }
+    }
+    const searchBox = document.getElementById('searchList')
+    searchBox.innerHTML = '' // clear
+    //console.log(searchList);
+    
+    searchList.forEach(subjectData => {
+        console.log(subjectData);
+        const searchCard = document.createElement('div')
+        searchCard.className = 'searchCard'
+        searchCard.id = 'card'+subjectData[0].subjectID
+        const nameDisplay = document.createElement('h1')
+        nameDisplay.innerHTML = subjectData[0].subjectName
+        const idDisplay = document.createElement('p')
+        idDisplay.innerHTML = subjectData[0].subjectID
+        searchCard.append(nameDisplay,idDisplay)
+        searchBox.appendChild(searchCard)
+    });
+}   
 function timeAdd(){
     console.log('change');
     const courseWeeklySelect = document.getElementById('courseCnt')
@@ -148,12 +192,6 @@ function tableGenerator(){
     }
     tableContainer.appendChild(table)
 }
-function search(){
-    const searchName = document.getElementById('searchSubjectName').innerHTML
-    const searchID = document.getElementById('searchSubjectID').innerHTML
-    console.log(searchName + ' ' + searchID);
-    if(!searchName || !searchID) alert('Pls fill before submit your search')
-}   
 /*
 async function updateItem() {
     console.log('updateItem');
@@ -199,7 +237,7 @@ async function deleteItem() {
 document.getElementById('test').addEventListener('click',checkDataBase)
 document.getElementById('courseCnt').addEventListener('change',timeAdd)
 document.getElementById('addItemBtn').addEventListener('click',addItem)
-document.getElementById('addToPlanner').addEventListener('click',search)
+document.getElementById('searchBtn').addEventListener('click',search)
 // Starting Func when starting up website
 timeAdd()
 tableGenerator()
