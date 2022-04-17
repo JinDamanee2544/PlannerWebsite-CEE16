@@ -41,51 +41,65 @@
                 </tr>
             </table>
         </section>
-        <section class="section-editpanel">
-            <div class="subHeader">
-                Edit - Panel (BETA)
-            </div>
-            <div class="content">
-                <p>For inserting new subject into data base </p>
-
-                <label>Subject Name</label>
-                <input id="subjectName" type="text">
-                <br>
-                <label>Subject ID</label>
-                <input id="subjectID" type="text">
-                <br>
-                <label>Section</label>
-                <input id="section" type="text">
-                <br>
-                <label>instructor Name</label>
-                <input id="instructorName" type="text">
-                <br>
-                <label>Classroom</label>
-                <input id="classroom" type="text">
-            </div>
-            <div class="content">
-                <p>Time detail</p>
-                <label>number of course in each week</label>
-                <select name="#course" id="courseCnt">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-
-                <br>
-                <div id="timeDetail">
-                    <!--Auto Generate In JS : Depand On dropdown-->
+        <section>
+            <section class="section-editpanel">
+                <div class="subHeader"> Edit - Panel (BETA) </div>
+                <div class="content">
+                    <p>For inserting new subject into data base </p>
+    
+                    <label>Subject Name</label>
+                    <input id="subjectName" type="text">
+                    <br>
+                    <label>Subject ID</label>
+                    <input id="subjectID" type="text">
+                    <br>
+                    <label>Section</label>
+                    <input id="section" type="text">
+                    <br>
+                    <label>instructor Name</label>
+                    <input id="instructorName" type="text">
+                    <br>
+                    <label>Classroom</label>
+                    <input id="classroom" type="text">
+                    <hr>
+                </div>
+                <div class="content">
+                    <p>Time detail</p>
+                    <label>number of course in each week</label>
+                    <select name="#course" id="courseCnt">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <br>
+                    <div id="timeDetail">
+                        <!--Auto Generate In JS : Depand On dropdown-->
+                    </div>
+                    <hr>
                 </div>
                 <button id="addItemBtn">AddItem</button>
                 <button id="test">Check DataBase (For Testing)</button>
-            </div>
+            </section>
+            <section class="section-searchPanel">
+                <div class="subHeader"> Search - Panel (BETA) </div>
+                <div class="content">
+                    <p>For Adding Subject in Planner </p>
+                    <label>Subject Name</label>
+                    <input id="searchSubjectName" type="text">
+                    <label>Subject ID</label>
+                    <input id="searchSubjectID" type="text">
+                </div>
+                <hr>
+                <div class="content">
+                    <p> Displaying What you search </p>
+                    <div class="searchList">
+                        <!-- Auto list in JS-->
+                    </div>
+                </div>
+                <hr>
+                <button id="addToPlanner">Add to Planner</button>
+            </section>
         </section>
-        <!--br-->
-        <!--br-->  <!-- Preventing Bottom-->
-        <!--br-->
-        <!--footer-->
-            <!--h1>Created by Group 16 - Due to Comp Eng Ess Project</h1-->
-        <!--/footer-->
         </div>
     </body>
 </html>

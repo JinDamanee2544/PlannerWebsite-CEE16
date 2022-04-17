@@ -108,7 +108,7 @@ function addItem(){
             section,
             subjectID,
             subjectName,
-            timeMap                 // <-------------- Problem Here : Can't push Map in database. Pls someone Help!
+            timeMap
         })
         console.log("Add successfully");
     } else {
@@ -148,6 +148,12 @@ function tableGenerator(){
     }
     tableContainer.appendChild(table)
 }
+function search(){
+    const searchName = document.getElementById('searchSubjectName').innerHTML
+    const searchID = document.getElementById('searchSubjectID').innerHTML
+    console.log(searchName + ' ' + searchID);
+    if(!searchName || !searchID) alert('Pls fill before submit your search')
+}   
 /*
 async function updateItem() {
     console.log('updateItem');
@@ -193,7 +199,7 @@ async function deleteItem() {
 document.getElementById('test').addEventListener('click',checkDataBase)
 document.getElementById('courseCnt').addEventListener('change',timeAdd)
 document.getElementById('addItemBtn').addEventListener('click',addItem)
-
+document.getElementById('addToPlanner').addEventListener('click',search)
 // Starting Func when starting up website
 timeAdd()
 tableGenerator()
