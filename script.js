@@ -52,9 +52,9 @@ async function checkDataBase(){
 }
 async function search(){
     console.log('search');
-    const searchName = document.getElementById('searchSubjectName').value
-    const searchID = document.getElementById('searchSubjectID').value
-    console.log(searchName + ' ' + searchID);
+    const searchName = document.getElementById('searchSubjectName').value.trim().toUpperCase()
+    const searchID = document.getElementById('searchSubjectID').value.trim()
+    //console.log(searchName + ' ' + searchID);
     /*
     if(!searchName || !searchID){ // Catch Error
         alert('Pls fill before submit your search')
@@ -78,18 +78,42 @@ async function search(){
     const searchBox = document.getElementById('searchList')
     searchBox.innerHTML = '' // clear
     //console.log(searchList);
-    
-    searchList.forEach(subjectData => {
+    var idx = 1;
+    searchList[0].forEach(subjectData => {
         console.log(subjectData);
         const searchCard = document.createElement('div')
         searchCard.className = 'searchCard'
-        searchCard.id = 'card'+subjectData[0].subjectID
-        const nameDisplay = document.createElement('h1')
-        nameDisplay.innerHTML = subjectData[0].subjectName
-        const idDisplay = document.createElement('p')
-        idDisplay.innerHTML = subjectData[0].subjectID
-        searchCard.append(nameDisplay,idDisplay)
+        searchCard.id = 'card'+subjectData.subjectID+'-'+subjectData.section
+
+        const titleDiv = document.createElement('div')
+        titleDiv.className = 'searchCard-title'
+        const nameIDDisplay = document.createElement('h1')
+        nameIDDisplay.innerHTML = subjectData.subjectID + ' - '+ subjectData.subjectName
+        const secDisplay = document.createElement('h1')
+        secDisplay.innerHTML = subjectData.section
+        titleDiv.append(nameIDDisplay,secDisplay)
+
+        const contentDiv = document.createElement('div')
+        contentDiv.className = 'searchCard-content'
+
+        const instDisplay = document.createElement('p')
+        instDisplay.innerHTML = 'Instructor Name : '+subjectData.instructorName
+        contentDiv.append(instDisplay)
+        const timeMap = subjectData.timeMap
+        for(var day in timeMap){
+            const dayTimeDisplay = document.createElement('p')
+            dayTimeDisplay.innerHTML = day+' : '+timeMap[day].start + ' - ' +timeMap[day].end
+            contentDiv.append(dayTimeDisplay)
+        }
+        idx++;
+        const addToPlannerBtn = document.createElement('button')
+        addToPlannerBtn.id = 'add'+idx
+        addToPlannerBtn.innerHTML = 'Add To my Planner'
+        addToPlannerBtn.className = 'addToPlannerBtn'
+        addToPlannerBtn.addEventListener('click',addToPlanner)
+        searchCard.append(titleDiv,contentDiv,addToPlannerBtn)
         searchBox.appendChild(searchCard)
+
     });
 }   
 function timeAdd(){
@@ -129,11 +153,11 @@ function addItem(){
     console.log("Add Item");
 
     // fetch 
-    const subjectName = document.getElementById('subjectName').value
-    const subjectID = document.getElementById('subjectID').value
-    const section = document.getElementById('section').value
-    const instructorName = document.getElementById('instructorName').value
-    const classroom = document.getElementById('classroom').value
+    const subjectName = document.getElementById('subjectName').value.trim().toUpperCase()
+    const subjectID = document.getElementById('subjectID').value.trim()
+    const section = document.getElementById('section').value.trim()
+    const instructorName = document.getElementById('instructorName').value.trim().toUpperCase()
+    const classroom = document.getElementById('classroom').value.trim()
     
     const timeMap = {}
     for (let index = 1; index <= CourseWeeklyGlobal; index++) {
@@ -191,6 +215,9 @@ function tableGenerator(){
         }
     }
     tableContainer.appendChild(table)
+}
+function addToPlanner(){
+    
 }
 /*
 async function updateItem() {

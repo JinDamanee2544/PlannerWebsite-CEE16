@@ -108,6 +108,7 @@ table th{
 .section-editpanel{
     padding : 10px 10px;
     display: flex;
+    justify-content: flex-start;
     flex-direction: column;
     width: fit-content;
     background-color: #FFF;
@@ -134,7 +135,33 @@ table th{
     background-color: #FFF;
 }
 .searchCard{
+    display: flex;
+    flex-direction: column;
     background-color: rgb(214, 214, 214);
     margin: 10px 10px;
-    padding : 10px 10px;
+    border-radius: 10px;
+}
+.searchCard-content{
+    width: fit-content;
+    padding : 10px;
+}
+.searchCard-title{
+    display: inline-flex;
+    justify-content : space-between;
+    align-items: center; 
+    background-color: #989898;
+    padding: 10px 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: #363636;
+}
+.example{
+    padding: 10px;
+}
+.addToPlannerBtn{
+    background-color: #989898;
+    margin: 0px 10px 10px 10px;
+}
+.addToPlannerBtn:hover{
+    background-color: #363636;
 }
