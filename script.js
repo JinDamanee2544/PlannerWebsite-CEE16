@@ -35,8 +35,8 @@ const db = getFirestore();
 const subjectRef = collection(db, 'subjects');
 
 // global
-var CourseWeeklyGlobal = 1;
-
+var selectWeeklyGlobal = 1;
+var selectQueryGlobal = 0; // 0:ID 1:Name
 
 async function checkDataBase(){
     console.log('CheckDatabase');
@@ -52,17 +52,19 @@ async function checkDataBase(){
 }
 async function search(){
     console.log('search');
-    const searchName = document.getElementById('searchSubjectName').value.trim().toUpperCase()
-    const searchID = document.getElementById('searchSubjectID').value.trim()
-    //console.log(searchName + ' ' + searchID);
-    /*
-    if(!searchName || !searchID){ // Catch Error
-        alert('Pls fill before submit your search')
-        console.log('searchFail');
+    var search
+    if(selectQueryGlobal==0){ // By ID
+        search = document.getElementById('searchSubjectID').value.trim()
+    } else {
+        search = document.getElementById('searchSubjectName').value.trim().toUpperCase()
     }
-    */
-    const foundIDref = query(subjectRef, where('subjectID', '==', `${searchID}`));
-    const queryID = await getDocs(foundIDref)
+    var foundref
+    if(selectQueryGlobal==0){
+        foundref = query(subjectRef, where('subjectID', '==', `${search}`));
+    } else {
+        foundref = query(subjectRef, where('subjectName', '==', `${search}`));
+    }
+    const queryID = await getDocs(foundref)
     const searchList = [] // array of data array - 2D array
     if(queryID){
         const queryMap = queryID.docs.map(item=>({
@@ -71,6 +73,7 @@ async function search(){
         if(queryMap.length==0) {
             console.log('Not found');
             alert('Not found')
+            return;
         } else {
             searchList.push(queryMap)
         }
@@ -118,9 +121,9 @@ async function search(){
 }   
 function timeAdd(){
     console.log('change');
-    const courseWeeklySelect = document.getElementById('courseCnt')
+    const courseWeeklySelect = document.getElementById('selectWeekly')
     const courseWeekly = courseWeeklySelect.options[courseWeeklySelect.selectedIndex].value;
-    CourseWeeklyGlobal = courseWeekly // Set global
+    selectWeeklyGlobal = courseWeekly // Set global
     
     const timeDiv = document.getElementById('timeDetail')
     timeDiv.innerHTML = '' //clear
@@ -148,6 +151,29 @@ function timeAdd(){
         eachInfo.append(order,day,dayInput,timeStart,startInput,timeEnd,endInput)
         timeDiv.appendChild(eachInfo)
     }
+}
+function queryChoice(){
+    console.log('updateQueryWay');
+    const queryDiv = document.getElementById('queryChoice')
+    queryDiv.innerHTML = '' //clear
+    const selectQuery = document.getElementById('selectQuery')
+    const choice = selectQuery.options[selectQuery.selectedIndex].value
+    selectQueryGlobal = choice
+    if(choice==0){
+        const idLabel = document.createElement('label')
+        idLabel.innerHTML = 'Subject ID : '
+        const inputID = document.createElement('input')
+        inputID.id = 'searchSubjectID'
+        inputID.type = 'text'
+        queryDiv.append(idLabel,inputID)
+    } else {
+        const nameLabel = document.createElement('label')
+        nameLabel.innerHTML = 'Subject Name : '
+        const inputName = document.createElement('input')
+        inputName.id = 'searchSubjectName'
+        inputName.type = 'text'
+        queryDiv.append(nameLabel,inputName)
+    } 
 }
 function addItem(){
     console.log("Add Item");
@@ -217,7 +243,7 @@ function tableGenerator(){
     tableContainer.appendChild(table)
 }
 function addToPlanner(){
-    
+
 }
 /*
 async function updateItem() {
@@ -262,9 +288,11 @@ async function deleteItem() {
 
 // Binding Func with btn
 document.getElementById('test').addEventListener('click',checkDataBase)
-document.getElementById('courseCnt').addEventListener('change',timeAdd)
+document.getElementById('selectWeekly').addEventListener('change',timeAdd)
+document.getElementById('selectQuery').addEventListener('change',queryChoice)
 document.getElementById('addItemBtn').addEventListener('click',addItem)
 document.getElementById('searchBtn').addEventListener('click',search)
 // Starting Func when starting up website
 timeAdd()
 tableGenerator()
+queryChoice()

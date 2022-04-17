@@ -65,8 +65,8 @@
                 </div>
                 <div class="content">
                     <p>Time detail</p>
-                    <label>number of course in each week</label>
-                    <select name="#course" id="courseCnt">
+                    <label>number of course in each week : </label>
+                    <select id="selectWeekly">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -84,10 +84,14 @@
                 <div class="subHeader"> Search - Panel (BETA) </div>
                 <div class="content">
                     <p>For Adding Subject in Planner </p>
-                    <label>Subject Name</label>
-                    <input id="searchSubjectName" type="text">
-                    <label>Subject ID</label>
-                    <input id="searchSubjectID" type="text">
+                    <label>Query By : </label>
+                    <select id="selectQuery">
+                        <option value="0">Subject ID</option>
+                        <option value="1">Subject Name</option>
+                    </select>
+                    <div id="queryChoice">
+                        <!--Auto generate In JS-->
+                    </div>
                 </div>
                 <hr>
                 <div class="content">
