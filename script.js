@@ -349,7 +349,7 @@ function upDateColSpan(subjectCnt){
     const headTime = document.getElementById('headTime')
     headTime.colSpan = subjectCnt
 }
-
+/*
 async function deleteItem() {
     console.log('deleteItem');
 
@@ -358,7 +358,7 @@ async function deleteItem() {
 
     await deleteDoc(docRef);
 }
-
+*/
 // Binding Func with btn
 document.getElementById('test').addEventListener('click',checkDataBase)
 document.getElementById('selectWeekly').addEventListener('change',timeAdd)
