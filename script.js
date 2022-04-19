@@ -26,6 +26,8 @@ import {
     where,
     query,
     arrayUnion,
+    arrayRemove,
+    setDoc,
 } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js';
 
 // ======================================================= //
@@ -193,7 +195,7 @@ function addItem(){
     const classroom = document.getElementById('classroom').value.trim()
     
     const timeMap = {}
-    for (let index = 1; index <= CourseWeeklyGlobal; index++) {
+    for (let index = 1; index <= selectWeeklyGlobal; index++) {
         var dayInput = document.getElementById(`dayInput${index}`).value
         var startInput = document.getElementById(`startInput${index}`).value
         var endInput = document.getElementById(`endInput${index}`).value
@@ -203,7 +205,8 @@ function addItem(){
 
     //console.log(timeMap);
     if(classroom && instructorName && section && subjectID && subjectName && timeMap){
-        addDoc(subjectRef,{
+        const locationRef = doc(db,'subjects',`${subjectID}-${section}`)
+        setDoc(locationRef,{
             classroom,
             instructorName,
             section,
@@ -388,7 +391,10 @@ function openDetail(course){
     const deleteBtn = document.createElement('button')
     deleteBtn.innerHTML = 'Delete From My Planner'
     deleteBtn.className = 'deleteBtn'
-    deleteBtn.addEventListener('click',deleteFromPlanner)
+    deleteBtn.addEventListener('click',function(){
+        deleteFromPlanner(course);
+        closeDetail();
+    })
 
     popUpBox.append(title,closeBtn,courseID,section,instructorName,classRoom,timeDiv,deleteBtn)
     container.append(popUpBox,grayBG)
@@ -399,8 +405,21 @@ function closeDetail(){
     const grayBG = document.getElementById('grayBG')
     grayBG.remove()
 }
-function deleteFromPlanner(){
-
+async function deleteFromPlanner(course){
+    /*
+    await updateDoc(addcheckerRef,{
+        checker : arrayRemove(`${course.subjectID}` + '-'+`${course.section}`)
+    })
+    */
+    const foundref = query(myPlannerRef, where('subjectID', '==', `${course.subjectID}`),
+                                         where('section', '==', `${course.section}`));
+    const foundSnap = await getDocs(foundref)                                                   // <---------- ทำถึงตรงนี้
+    /*
+    foundSnap.forEach(course => {
+        console.log('delete : ' + course.data().subjectName);
+        await deleteDoc(doc('db','myPlanner',`${course.id}`))
+    })
+    */
 }
 /*
 async function deleteItem() {
