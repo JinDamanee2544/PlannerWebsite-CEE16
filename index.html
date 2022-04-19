@@ -7,11 +7,19 @@
     </head>
     <body>
     <div class = "container">
-        <section class="navbar">
-            <h1>COURSE  PLANNER</h1>
-        </section>
+        <nav>
+            <div class="navbar">
+                <div class="name"><a href="#">COURSE PLANNER</a></div>
+                <ul class="menu">
+                    <li><a href="#tableTest">Schedule</a></li>
+                    <li><a href="#editpanel">Add subject</a></li>
+                    <li><a href="#search">Search</a></li>
+                    <li><a href="#about">About Project</a></li>
+                </ul>
+            </div>
+        </nav>
         <section class="section-table" id="myTable">
-            <!-- Auto Generate in JS-->
+            <!--Auto generate table in JS-->
         </section>
         <!--    Test Table
             <section class="section-table">
@@ -44,7 +52,7 @@
         </section>
         -->
         <section>
-            <section class="section-editpanel">
+            <section class="section-editpanel" id="editpanel">
                 <div class="subHeader"> Edit - Panel (BETA) </div>
                 <div class="content">
                     <p>For inserting new subject into data base </p>
@@ -82,7 +90,7 @@
                 <button id="addItemBtn">AddItem</button>
                 <button id="test">Check DataBase (For Testing)</button>
             </section>
-            <section class="section-searchPanel">
+            <section class="section-searchPanel" id="search">
                 <div class="subHeader"> Search - Panel (BETA) </div>
                 <div class="content">
                     <p>For Adding Subject in Planner </p>
@@ -125,6 +133,14 @@
                     </div>
                 </div>
             </section>
+        </section>
+        <section>
+            <div class="about-project" id="about">
+                <div class="content">
+                    <h1>to do about-project section</h1>
+                    <!--might be nice to attach the written report and the list of group members here-->
+                </div>
+            </div>
         </section>
         </div>
     </body>
