@@ -15,14 +15,40 @@ body{
     display: block;
     justify-content: center;
 }
-.navbar{
-    display: flex;
+nav {
+    position: relative;
+    left: 0; right: 0;
+    height: 75px;
+    width: 100%;
     background-color: #1B4D3E;
-    position:sticky;
-    text-align: center;
-    color : #fff; 
-    letter-spacing: 3px;
-    font-size:x-large;
+    box-shadow:0 3px 15px #363636;
+}
+nav .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: 70%;
+    margin: auto; 
+}
+nav .navbar .name a{
+    text-decoration: none;
+    color:#fff;
+    font-size: 2vw;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+nav .navbar .menu {
+    display: flex;
+}
+.navbar .menu li {
+    list-style: none;
+    margin: 0 25px;
+}
+.navbar .menu li a{
+    text-decoration: none;
+    font-size: 1vw;
+    color: #fff;
 }
 footer{
     background-color: #1bb270;
@@ -79,7 +105,9 @@ hr{
 .container{
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+    /* background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%); */
+    background: linear-gradient(to bottom, rgba(217, 231, 255,0.9), rgba(255, 253, 208, 0.7)),
+    url('images/bg.jpg');
     background-position: center;
     background-size:cover;
 }
