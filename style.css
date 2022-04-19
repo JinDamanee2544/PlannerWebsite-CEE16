@@ -87,6 +87,9 @@ hr{
 .section-table{
     display: flex;
 }
+.headDay{
+    width: 100px;
+}
 table{
     width: max-content;
     background-color: #FFF;
@@ -103,6 +106,11 @@ table th{
     background-color:  #1bb270;
     color: #fff;
     /* border-color: #000000; */
+}
+.subjectDivInTable{
+    padding: 10px 10px;
+    border-radius: 10px;
+    background-color: #e6e6e6;
 }
 /* --------------------- Edit panel --------------------- */
 .section-editpanel{

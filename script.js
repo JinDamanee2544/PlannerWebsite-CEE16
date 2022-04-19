@@ -25,6 +25,7 @@ import {
     updateDoc,
     where,
     query,
+    arrayUnion,
 } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js';
 
 // ======================================================= //
@@ -33,10 +34,14 @@ import {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 const subjectRef = collection(db, 'subjects');
+const myPlannerRef = collection(db,'myPlanner');
+const addcheckerRef = doc(db,'checker','planner');
 
 // global
 var selectWeeklyGlobal = 1;
 var selectQueryGlobal = 0; // 0:ID 1:Name
+var subjectInplanner = 0;
+var subjectInplannerSet = new Set();
 
 async function checkDataBase(){
     console.log('CheckDatabase');
@@ -83,7 +88,7 @@ async function search(){
     //console.log(searchList);
     var idx = 1;
     searchList[0].forEach(subjectData => {
-        console.log(subjectData);
+        //console.log(subjectData);
         const searchCard = document.createElement('div')
         searchCard.className = 'searchCard'
         searchCard.id = 'card'+subjectData.subjectID+'-'+subjectData.section
@@ -113,7 +118,9 @@ async function search(){
         addToPlannerBtn.id = 'add'+idx
         addToPlannerBtn.innerHTML = 'Add To my Planner'
         addToPlannerBtn.className = 'addToPlannerBtn'
-        addToPlannerBtn.addEventListener('click',addToPlanner)
+        addToPlannerBtn.addEventListener('click',function(){
+            addToPlanner(subjectData)   
+        })
         searchCard.append(titleDiv,contentDiv,addToPlannerBtn)
         searchBox.appendChild(searchCard)
 
@@ -210,6 +217,7 @@ function addItem(){
         console.log("Fail");
     }
 }
+/*
 function tableGenerator(){
     const tableContainer = document.getElementById('tableTest')
     const table = document.createElement('table')
@@ -242,38 +250,111 @@ function tableGenerator(){
     }
     tableContainer.appendChild(table)
 }
-function addToPlanner(){
+*/
+function myTableGenerator(){
+    const tableContainer = document.getElementById('myTable')
+    tableContainer.innerHTML = ''
+    const table = document.createElement('table')
+    // ----------- head --------------// 
+    const headRow = document.createElement('tr')
+    const headDay = document.createElement('th')
+    headDay.innerHTML = 'Day'
+    headDay.className = 'headDay'
+    headDay.style.borderTopLeftRadius = '25px'
+    const headTime = document.createElement('th')
+    headTime.innerHTML = 'Time'
+    headTime.id = 'headTime'
+    headTime.colSpan = subjectInplanner
+    headTime.style.borderTopRightRadius = '25px'
+    headRow.append(headDay,headTime) 
+    table.appendChild(headRow)
+    // ------------- Content ------------//
+    const day = ['MON','TUE','WED','THU','FRI']
+    for(let idx=0;idx<5;idx++){
+        var thisDay = day[idx]
+        const contentRow = document.createElement('tr')
+        contentRow.id = thisDay
+        const dayCol = document.createElement('td')
+        dayCol.innerHTML = thisDay
+        contentRow.appendChild(dayCol)
+        table.appendChild(contentRow)
+        /*
+        for(let idx=0;idx<subjectInplanner-1;idx++){
+            const contentCol = document.createElement('td')
+            contentCol.innerHTML=''
+            contentRow.appendChild(contentCol)
+        }
+        */
+    }
+    tableContainer.appendChild(table)
 
 }
-/*
-async function updateItem() {
-    console.log('updateItem');
+async function addToPlanner(subjectData){
+    
+    const checkerSnap = await getDoc(addcheckerRef)
+    const checker = checkerSnap.data().checker
+    if(checker){
+        const checkSubject = subjectData.subjectID + '-' + subjectData.section
+        console.log(checkSubject);
+        if(checker.includes(checkSubject)){
+            alert("It's already in Planner")
+            console.log("It's already in Planner");
+            return;
+        } else {
+            await updateDoc(addcheckerRef,{
+                checker : arrayUnion(`${subjectData.subjectID}` + '-'+`${subjectData.section}`)
+            })
+        }
+    }
+    subjectInplanner++;
+    subjectInplannerSet.add(`${subjectData.subjectID}+'-'+${subjectData.section}`)
+    
+    addDoc(myPlannerRef,{
+        subjectID : subjectData.subjectID,
+        subjectName : subjectData.subjectName,
+        section : subjectData.section,
+        instructorName : subjectData.instructorName,
+        classroom : subjectData.classroom,
+        timeMap : subjectData.timeMap
+    })
+    updateTable();
+}
+async function updateTable(){
+    const allSubjectDoc = await getDocs(myPlannerRef)
+    if(allSubjectDoc){
+        const allSubject = allSubjectDoc.docs.map((item) => ({
+            ...item.data(),
+        }));
+        //console.log(allSubject);
+        var subjectCnt = allSubject.length
+        console.log('CNT : '+subjectCnt)
+        myTableGenerator()
+        upDateColSpan(subjectCnt)
+        for(var idx=0;idx<allSubject.length;idx++){
+            //console.log(allSubject[idx]);
+            var thisSubject = allSubject[idx];
+            for(var day in thisSubject.timeMap){
+                //console.log(`${day} : ` + subjectData.timeMap[day].start + ' ' + subjectData.timeMap[day].end);
+                const thisRow = document.getElementById(`${day}`)
+                const subjectBox = document.createElement('td')
 
-    const docId = document.getElementById('docId').value;
+                const subjectDiv = document.createElement('div')
+                subjectDiv.className = 'subjectDivInTable'
+                const title = document.createElement('p')
+                title.innerHTML = `${thisSubject.subjectName}`
+                const time = document.createElement('p')
+                time.innerHTML = `${thisSubject.timeMap[day].start}`+' - '+`${thisSubject.timeMap[day].end}`
 
-    const bookRef = await doc(db, `books/${docId}`);
-    let bookInstance = await getDoc(bookRef);
-    bookInstance = bookInstance.data();
-
-    const title = document.getElementById('title').value;
-    const author = document.getElementById('author').value;
-    const isbn = document.getElementById('isbn').value;
-
-    const bookData = {
-        title: title ? title : bookInstance.title,
-        author: author ? author : bookInstance.author,
-        isbn: isbn ? isbn : bookInstance.isbn,
-    };
-
-    console.log(bookData);
-
-    updateDoc(bookRef, bookData)
-        .then(function () {
-            console.log('success');
-        })
-        .catch(function (error) {
-            console.log('failed', error);
-        });
+                subjectDiv.append(title,time)
+                subjectBox.append(subjectDiv)
+                thisRow.appendChild(subjectBox)
+            }
+        }
+    }
+}
+function upDateColSpan(subjectCnt){
+    const headTime = document.getElementById('headTime')
+    headTime.colSpan = subjectCnt
 }
 
 async function deleteItem() {
@@ -284,7 +365,6 @@ async function deleteItem() {
 
     await deleteDoc(docRef);
 }
-*/
 
 // Binding Func with btn
 document.getElementById('test').addEventListener('click',checkDataBase)
@@ -294,5 +374,7 @@ document.getElementById('addItemBtn').addEventListener('click',addItem)
 document.getElementById('searchBtn').addEventListener('click',search)
 // Starting Func when starting up website
 timeAdd()
-tableGenerator()
+//tableGenerator()
 queryChoice()
+myTableGenerator()
+updateTable()
