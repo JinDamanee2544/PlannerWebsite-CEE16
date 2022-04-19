@@ -140,6 +140,13 @@ table th{
     border-radius: 10px;
     background-color: #e6e6e6;
 }
+.subjectDivInTable:hover{
+    transition: 0.5s;
+    background-color: #c8c8c8;
+}
+.subjectDivInTable p:first-child{
+    font-weight: bold;
+}
 /* --------------------- Edit panel --------------------- */
 .section-editpanel{
     padding : 10px 10px;
@@ -201,4 +208,50 @@ table th{
 }
 .addToPlannerBtn:hover{
     background-color: #363636;
+}
+/* ------------- Pop Up ------------- */ 
+.grayBG{
+    z-index: 100;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #000000;
+    opacity: 50%;
+}
+.popUpBox{
+    z-index: 200;
+    position: fixed;
+    min-width: 400px;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #FFF;
+    display: flex;
+    padding: 20px;
+    border-radius: 10px;
+    flex-direction: column;
+
+}
+.closeBtn{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    height: fit-content;
+    background-color: #ff0000;
+    color: #FFF;
+    margin: 0px;
+}
+.closeBtn:hover{
+    background-color: #cc0303;
+    transition: 0.5s;
+}
+.deleteBtn{
+    background-color: #ff0000;
+}
+.deleteBtn:hover{
+    background-color: #cc0303;
 }

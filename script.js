@@ -283,7 +283,6 @@ function myTableGenerator(){
 
 }
 async function addToPlanner(subjectData){
-    
     const checkerSnap = await getDoc(addcheckerRef)
     const checker = checkerSnap.data().checker
     if(checker){
@@ -333,6 +332,10 @@ async function updateTable(){
 
                 const subjectDiv = document.createElement('div')
                 subjectDiv.className = 'subjectDivInTable'
+                subjectDiv.id = 'subjectDivInTable'
+                subjectDiv.addEventListener('click',function(){
+                    openDetail(thisSubject)
+                })
                 const title = document.createElement('p')
                 title.innerHTML = `${thisSubject.subjectName}`
                 const time = document.createElement('p')
@@ -348,6 +351,56 @@ async function updateTable(){
 function upDateColSpan(subjectCnt){
     const headTime = document.getElementById('headTime')
     headTime.colSpan = subjectCnt
+}
+function openDetail(course){
+    console.log(course);
+    console.log('openDetail');
+    const container = document.getElementById('container')
+    const popUpBox = document.createElement('div')
+    popUpBox.className = 'popUpBox'
+    popUpBox.id = 'popUpBox'
+    const title = document.createElement('h1')
+    title.innerHTML = `${course.subjectName}`
+    const grayBG = document.createElement('div')
+    grayBG.className = 'grayBG'
+    grayBG.id = 'grayBG'
+
+    const closeBtn = document.createElement('button')
+    closeBtn.innerHTML = 'Close'
+    closeBtn.className = 'closeBtn'
+    closeBtn.addEventListener('click',closeDetail)
+
+    const instructorName = document.createElement('p')
+    instructorName.innerHTML = 'Instructor Name : '+`${course.instructorName}`
+    const classRoom = document.createElement('p')
+    classRoom.innerHTML = 'Classroom : '+`${course.classroom}`
+    const section = document.createElement('p')
+    section.innerHTML = 'Section : '+`${course.section}`
+    const courseID = document.createElement('p')
+    courseID.innerHTML = 'Subject ID : '+`${course.subjectID}`
+    const timeDiv = document.createElement('div')
+    for(var day in course.timeMap){
+        const time = document.createElement('p')
+        time.innerHTML = `${day} : ${course.timeMap[day].start} - ${course.timeMap[day].end}`
+        timeDiv.append(time)
+    }
+    
+    const deleteBtn = document.createElement('button')
+    deleteBtn.innerHTML = 'Delete From My Planner'
+    deleteBtn.className = 'deleteBtn'
+    deleteBtn.addEventListener('click',deleteFromPlanner)
+
+    popUpBox.append(title,closeBtn,courseID,section,instructorName,classRoom,timeDiv,deleteBtn)
+    container.append(popUpBox,grayBG)
+}
+function closeDetail(){
+    const popUpBox = document.getElementById('popUpBox')
+    popUpBox.remove()
+    const grayBG = document.getElementById('grayBG')
+    grayBG.remove()
+}
+function deleteFromPlanner(){
+
 }
 /*
 async function deleteItem() {
