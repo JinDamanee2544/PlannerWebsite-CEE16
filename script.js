@@ -278,13 +278,6 @@ function myTableGenerator(){
         dayCol.innerHTML = thisDay
         contentRow.appendChild(dayCol)
         table.appendChild(contentRow)
-        /*
-        for(let idx=0;idx<subjectInplanner-1;idx++){
-            const contentCol = document.createElement('td')
-            contentCol.innerHTML=''
-            contentRow.appendChild(contentCol)
-        }
-        */
     }
     tableContainer.appendChild(table)
 
