@@ -44,6 +44,7 @@ var selectWeeklyGlobal = 1;
 var selectQueryGlobal = 0; // 0:ID 1:Name
 var subjectInplanner = 0;
 var subjectInplannerSet = new Set();
+var isOverLap = false;
 
 async function checkDataBase(){
     console.log('CheckDatabase');
@@ -286,21 +287,32 @@ function myTableGenerator(){
 
 }
 async function addToPlanner(subjectData){
+    // checking Duplicate
     const checkerSnap = await getDoc(addcheckerRef)
     const checker = checkerSnap.data().checker
     if(checker){
         const checkSubject = subjectData.subjectID + '-' + subjectData.section
-        console.log(checkSubject);
+        //console.log(checkSubject);
         if(checker.includes(checkSubject)){
             alert("It's already in Planner")
             console.log("It's already in Planner");
             return;
-        } else {
-            await updateDoc(addcheckerRef,{
-                checker : arrayUnion(`${subjectData.subjectID}` + '-'+`${subjectData.section}`)
-            })
         }
     }
+    // checking time overlap
+    const checkOverLap = await overlapping(subjectData)
+    //console.log(checkOverLap);
+    if(checkOverLap){
+        alert('Your selected course has overlapped with another course in planner')
+        console.log('Your selected course has overlapped with another course in planner');
+        return;
+    }
+
+    // Update Duplicate Checker
+    await updateDoc(addcheckerRef,{
+        checker : arrayUnion(`${subjectData.subjectID}` + '-'+`${subjectData.section}`)
+    })
+    
     subjectInplanner++;
     subjectInplannerSet.add(`${subjectData.subjectID}+'-'+${subjectData.section}`)
     
@@ -313,8 +325,53 @@ async function addToPlanner(subjectData){
         classroom : subjectData.classroom,
         timeMap : subjectData.timeMap
     })
+    
     updateTable();
 }
+async function overlapping(course){
+    // fetch database and sort
+    isOverLap = false
+    const allSubjectDoc = await getDocs(myPlannerRef)
+    if(allSubjectDoc){
+        const allSubject = allSubjectDoc.docs.map((item) => ({
+            ...item.data(),
+        }));
+        /*
+        if(allSubject.length==0){
+            isOverLap = false;
+            return false;
+        }*/
+        var dayMap = {
+            "MON":[],
+            "TUE":[],
+            "WED":[],
+            "THU":[],
+            "FRI":[]
+        }
+        for(var idx=0;idx<allSubject.length;idx++){
+            var thisSubject = allSubject[idx];
+            for(var day in thisSubject.timeMap){
+                dayMap[day].push(thisSubject) 
+            }
+        }
+        for(var day in course.timeMap){
+            const courseTimeStart = course.timeMap[day].start.replace(':','')
+            const courseTimeEnd = course.timeMap[day].end.replace(':','')
+            dayMap[day].forEach(otherCourse => {
+                var otherCourseStart = otherCourse.timeMap[day].start.replace(':','')
+                var otherCourseEnd = otherCourse.timeMap[day].end.replace(':','')
+                if(Number(courseTimeStart) < Number(otherCourseEnd) && Number(courseTimeEnd) > Number(otherCourseStart)){
+                    //console.log(course.subjectName + ' ' + otherCourse.subjectName);
+                    isOverLap = true;
+                    //return true  <---- This won't work I don't know I can't return
+                    // So I crete boolean for this instead 
+                }
+            })
+        }
+    }
+    return isOverLap
+}
+
 async function updateTable(){
     const allSubjectDoc = await getDocs(myPlannerRef)
     if(allSubjectDoc){
@@ -346,11 +403,11 @@ async function updateTable(){
             coursesThisDay.sort(function(a,b){
                 return a.timeMap[day].start.replace(':','') - b.timeMap[day].start.replace(':','')
             })
-            for(var idx=0 ; idx<coursesThisDay.length ;idx++){
-                var course = coursesThisDay[idx];
+            for(var idx=0 ; idx<coursesThisDay.length ;idx++){   // Each Day
+                let course = coursesThisDay[idx];
+
                 const thisRow = document.getElementById(`${day}`)
                 const subjectBox = document.createElement('td')
-
                 const subjectDiv = document.createElement('div')
                 subjectDiv.className = 'subjectDivInTable'
                 subjectDiv.id = 'subjectDivInTable'
@@ -374,7 +431,7 @@ function upDateColSpan(subjectCnt){
     headTime.colSpan = subjectCnt
 }
 function openDetail(course){
-    console.log(course);
+    console.log(course.subjectName);
     console.log('openDetail');
     const container = document.getElementById('container')
     const popUpBox = document.createElement('div')
