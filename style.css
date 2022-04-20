@@ -15,12 +15,15 @@ body{
     display: block;
     justify-content: center;
 }
+
 nav {
-    position: relative;
-    left: 0; right: 0;
-    height: 75px;
+    /* overflow: hidden; */
+    position: fixed;
+    left: 0; right: 0; top: 0;
+    height: 100px;
     width: 100%;
-    background-color: #1B4D3E;
+    background-color: #1B4D3E; 
+    /* #E4B2C1 */
     box-shadow:0 3px 15px #363636;
 }
 nav .navbar {
@@ -31,12 +34,27 @@ nav .navbar {
     width: 70%;
     margin: auto; 
 }
+nav .navbar .menu li a:hover{
+    /* background:#fff; */
+    color:#E4B2C1;
+}
 nav .navbar .name a{
+    /* display: inline; */
     text-decoration: none;
     color:#fff;
     font-size: 2vw;
     font-weight: 800;
     letter-spacing: 2px;
+    /* justify-content: center; */
+}
+/* nav .navbar .name .course-planner { */
+    /* vertical-align: middle; */
+/* } */
+.navbar .name li {
+    display: inline;
+    list-style: none;
+    margin: 0 5px;
+    vertical-align: middle;
 }
 nav .navbar .menu {
     display: flex;
@@ -106,13 +124,15 @@ hr{
     width: 100%;
     height: 100%;
     /* background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%); */
-    background: linear-gradient(to bottom, rgba(217, 231, 255,0.9), rgba(255, 253, 208, 0.7)),
-    url('images/bg.jpg');
+    /* background: linear-gradient(to bottom, rgba(217, 231, 255,0.9), rgba(255, 253, 208, 0.7)), */
+    /* url('images/bg.jpg'); */
+    background-image: url('images/bg2.jpg');
     background-position: center;
     background-size:cover;
 }
 /* --------------------- Table --------------------- */
 .section-table{
+    padding-top: 120px;
     display: flex;
 }
 .headDay{
@@ -209,6 +229,15 @@ table th{
 .addToPlannerBtn:hover{
     background-color: #363636;
 }
+.about-project{
+    padding: 10px 10px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: fit-content;
+    background: #fff;
+    border-radius: 10px;
+}
 /* ------------- Pop Up ------------- */ 
 .grayBG{
     z-index: 100;
@@ -254,4 +283,9 @@ table th{
 }
 .deleteBtn:hover{
     background-color: #cc0303;
+}
+/* ------------- About ------------- */ 
+.about-project li {
+    text-align: center;
+    list-style: none;
 }
