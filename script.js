@@ -304,7 +304,8 @@ async function addToPlanner(subjectData){
     subjectInplanner++;
     subjectInplannerSet.add(`${subjectData.subjectID}+'-'+${subjectData.section}`)
     
-    addDoc(myPlannerRef,{
+    const locationRef = doc(db,'myPlanner',`${subjectData.subjectID}-${subjectData.section}`)
+    setDoc(locationRef,{
         subjectID : subjectData.subjectID,
         subjectName : subjectData.subjectName,
         section : subjectData.section,
@@ -322,14 +323,31 @@ async function updateTable(){
         }));
         //console.log(allSubject);
         var subjectCnt = allSubject.length
-        console.log('CNT : '+subjectCnt)
+        //console.log('CNT : '+subjectCnt)
         myTableGenerator()
         upDateColSpan(subjectCnt)
+
+        var dayMap = {
+            "MON":[],
+            "TUE":[],
+            "WED":[],
+            "THU":[],
+            "FRI":[]
+        }
         for(var idx=0;idx<allSubject.length;idx++){
-            //console.log(allSubject[idx]);
             var thisSubject = allSubject[idx];
             for(var day in thisSubject.timeMap){
-                //console.log(`${day} : ` + subjectData.timeMap[day].start + ' ' + subjectData.timeMap[day].end);
+                dayMap[day].push(thisSubject) 
+            }
+        }
+        
+        for(var day in dayMap){
+            var coursesThisDay = dayMap[day];
+            coursesThisDay.sort(function(a,b){
+                return a.timeMap[day].start.replace(':','') - b.timeMap[day].start.replace(':','')
+            })
+            for(var idx=0 ; idx<coursesThisDay.length ;idx++){
+                var course = coursesThisDay[idx];
                 const thisRow = document.getElementById(`${day}`)
                 const subjectBox = document.createElement('td')
 
@@ -337,12 +355,12 @@ async function updateTable(){
                 subjectDiv.className = 'subjectDivInTable'
                 subjectDiv.id = 'subjectDivInTable'
                 subjectDiv.addEventListener('click',function(){
-                    openDetail(thisSubject)
+                    openDetail(course)
                 })
                 const title = document.createElement('p')
-                title.innerHTML = `${thisSubject.subjectName}`
+                title.innerHTML = `${course.subjectName}`
                 const time = document.createElement('p')
-                time.innerHTML = `${thisSubject.timeMap[day].start}`+' - '+`${thisSubject.timeMap[day].end}`
+                time.innerHTML = `${course.timeMap[day].start}`+' - '+`${course.timeMap[day].end}`
 
                 subjectDiv.append(title,time)
                 subjectBox.append(subjectDiv)
@@ -406,31 +424,17 @@ function closeDetail(){
     grayBG.remove()
 }
 async function deleteFromPlanner(course){
-    /*
+    
     await updateDoc(addcheckerRef,{
         checker : arrayRemove(`${course.subjectID}` + '-'+`${course.section}`)
     })
-    */
-    const foundref = query(myPlannerRef, where('subjectID', '==', `${course.subjectID}`),
-                                         where('section', '==', `${course.section}`));
-    const foundSnap = await getDocs(foundref)                                                   // <---------- ทำถึงตรงนี้
-    /*
-    foundSnap.forEach(course => {
-        console.log('delete : ' + course.data().subjectName);
-        await deleteDoc(doc('db','myPlanner',`${course.id}`))
-    })
-    */
-}
-/*
-async function deleteItem() {
-    console.log('deleteItem');
+    
+    const deleteRef = doc(db,'myPlanner',`${course.subjectID}-${course.section}`)
 
-    const docId = document.getElementById('docId').value;
-    const docRef = doc(db, `books/${docId}`);
-
-    await deleteDoc(docRef);
+    await deleteDoc(deleteRef)
+    console.log('delete : ' + course.subjectName);
+    updateTable()
 }
-*/
 // Binding Func with btn
 document.getElementById('test').addEventListener('click',checkDataBase)
 document.getElementById('selectWeekly').addEventListener('change',timeAdd)
@@ -439,7 +443,6 @@ document.getElementById('addItemBtn').addEventListener('click',addItem)
 document.getElementById('searchBtn').addEventListener('click',search)
 // Starting Func when starting up website
 timeAdd()
-//tableGenerator()
 queryChoice()
 myTableGenerator()
 updateTable()
