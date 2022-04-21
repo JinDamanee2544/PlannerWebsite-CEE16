@@ -339,8 +339,14 @@ table th{
         align-items: center;
     }
     .subjectInput{
+        display: flex;
+        flex-direction: column;
         max-width: 600px;
-        justify-content: center;
+    }
+    .inputZone{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
     .section-searchPanel{
         width: 620px;
