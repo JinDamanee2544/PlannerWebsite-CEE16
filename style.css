@@ -99,7 +99,8 @@ section{
     justify-content: center;
 }
 input{
-    width : 100px;
+    width: 100px;
+    border-radius: 5px;
 }
 button{
     margin: 10px 0%;
@@ -293,6 +294,7 @@ table th{
     border-radius: 10px;
 }
 .displaySearch{
+    min-width: 300px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -315,7 +317,7 @@ table th{
 .popUpBox{
     z-index: 200;
     position: fixed;
-    min-width: 400px;
+    min-width: 450px;
     height: auto;
     top: 50%;
     left: 50%;
@@ -325,7 +327,6 @@ table th{
     padding: 20px;
     border-radius: 10px;
     flex-direction: column;
-
 }
 .closeBtn{
     position: absolute;
@@ -345,6 +346,12 @@ table th{
 }
 .deleteBtn:hover{
     background-color: #FBD6D2;
+}
+.timePopUp{
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    background-color: #FFF;
 }
 /* ------------- About ------------- */ 
 .about-project li {

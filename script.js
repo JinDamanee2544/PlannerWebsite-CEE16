@@ -15,18 +15,14 @@ const firebaseConfig = {
     appId: "1:649014743586:web:6bcfce98705e85ca9a707b"
   };
 import {
-    addDoc,
     collection,
     deleteDoc,
     doc,
     getDoc,
     getDocs,
     getFirestore,
-    updateDoc,
     where,
     query,
-    arrayUnion,
-    arrayRemove,
     setDoc,
 } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js';
 
@@ -42,7 +38,6 @@ const myPlannerRef = collection(db,'myPlanner');
 var selectWeeklyGlobal = 1;
 var selectQueryGlobal = 0; // 0:ID 1:Name
 var subjectInplanner = 0;
-var subjectInplannerSet = new Set();
 var isOverLap = false;
 
 async function checkDataBase(){
@@ -200,6 +195,7 @@ async function addItem(){
     if(searchSnap.data()){
         console.log("This subject already in database");
         alert("This subject already in database");
+        return;
     }
 
     
@@ -268,6 +264,7 @@ async function addToPlanner(course){
     if(searchSnap.data()){
         console.log();("This subject already in planner")
         alert("This subject already in planner")
+        return;
     }
     
     // checking time overlap
@@ -278,9 +275,6 @@ async function addToPlanner(course){
         console.log('Your selected course has overlapped with another course in planner');
         return;
     }
-    
-    subjectInplanner++;
-    subjectInplannerSet.add(`${course.subjectID}+'-'+${course.section}`)
     
     const locationRef = doc(db,'myPlanner',`${course.subjectID}-${course.section}`)
     setDoc(locationRef,{
@@ -338,7 +332,6 @@ async function overlapping(course){
     }
     return isOverLap
 }
-
 async function updateTable(){
     const allSubjectDoc = await getDocs(myPlannerRef)
     if(allSubjectDoc){
@@ -423,7 +416,10 @@ function openDetail(course){
     section.innerHTML = 'Section : '+`${course.section}`
     const courseID = document.createElement('p')
     courseID.innerHTML = 'Subject ID : '+`${course.subjectID}`
+    const timeLabel = document.createElement('p')
+    timeLabel.innerHTML = 'Time : '
     const timeDiv = document.createElement('div')
+    timeDiv.className = 'timePopUp'
     for(var day in course.timeMap){
         const time = document.createElement('p')
         time.innerHTML = `${day} : ${course.timeMap[day].start} - ${course.timeMap[day].end}`
@@ -437,8 +433,7 @@ function openDetail(course){
         deleteFromPlanner(course);
         closeDetail();
     })
-
-    popUpBox.append(title,closeBtn,courseID,section,instructorName,classRoom,timeDiv,deleteBtn)
+    popUpBox.append(title,closeBtn,courseID,section,instructorName,classRoom,timeLabel,timeDiv,deleteBtn)
     container.append(popUpBox,grayBG)
 }
 function closeDetail(){
