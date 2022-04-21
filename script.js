@@ -65,9 +65,9 @@ async function search(){
     }
     var foundref
     if(selectQueryGlobal==0){
-        foundref = query(subjectRef, where('subjectID', '==', `${search}`));
+        foundref = query(subjectRef, where('subjectID', '>=', `${search}`),where('subjectID', '<=', `${search}`+'\uf8ff'));
     } else {
-        foundref = query(subjectRef, where('subjectName', '==', `${search}`));
+        foundref = query(subjectRef, where('subjectName', '>=', `${search}`),where('subjectName', '<=', `${search}`+'\uf8ff'));
     }
     const queryID = await getDocs(foundref)
     const searchList = [] // array of data array - 2D array
@@ -182,7 +182,7 @@ function queryChoice(){
         queryDiv.append(nameLabel,inputName)
     } 
 }
-function addItem(){
+async function addItem(){
     console.log("Add Item");
 
     // fetch 
@@ -191,6 +191,16 @@ function addItem(){
     const section = document.getElementById('section').value.trim()
     const instructorName = document.getElementById('instructorName').value.trim().toUpperCase()
     const classroom = document.getElementById('classroom').value.trim()
+    
+    // search duplicate In db : Preventing duplicate subject
+    const search = `${subjectID}-${section}`
+    const searchRef = doc(db,'subjects',`${search}`)
+    const searchSnap = await getDoc(searchRef)
+    //console.log(searchSnap.data());
+    if(searchSnap.data()){
+        alert("It's already in database");
+        console.log("It's already in database");
+    }
     
     const timeMap = {}
     for (let index = 1; index <= CourseWeeklyGlobal; index++) {
@@ -217,40 +227,6 @@ function addItem(){
         console.log("Fail");
     }
 }
-/*
-function tableGenerator(){
-    const tableContainer = document.getElementById('tableTest')
-    const table = document.createElement('table')
-    // ----------- head --------------// 
-    const headRow = document.createElement('tr')
-    const headDayTime = document.createElement('th')
-    headDayTime.innerHTML = 'Day/Time'
-    headRow.appendChild(headDayTime)
-    for(let idx=8;idx<=16;idx++){
-        const headCol = document.createElement('th')
-        headCol.id = 'headCol'+idx
-        headCol.innerHTML = idx
-        headRow.appendChild(headCol)
-    }
-    table.append(headRow)
-    // ----------- content row --------------// 
-    const day = ['MON','TUE','WED','THU','FRI']
-    for(let idx=0;idx<5;idx++){
-        const contentRow = document.createElement('tr')
-        var thisDay = day[idx]
-        const dayCol = document.createElement('td')
-        dayCol.innerHTML = thisDay
-        contentRow.appendChild(dayCol)
-        table.appendChild(contentRow)
-        for(let idx=0;idx<9;idx++){
-            const contentCol = document.createElement('td')
-            contentCol.innerHTML=''
-            contentRow.appendChild(contentCol)
-        }
-    }
-    tableContainer.appendChild(table)
-}
-*/
 function myTableGenerator(){
     const tableContainer = document.getElementById('myTable')
     tableContainer.innerHTML = ''
@@ -356,7 +332,48 @@ async function deleteItem() {
     const docId = document.getElementById('docId').value;
     const docRef = doc(db, `books/${docId}`);
 
+<<<<<<< Updated upstream
     await deleteDoc(docRef);
+||||||| constructed merge base
+    popUpBox.append(title,closeBtn,courseID,section,instructorName,classRoom,timeDiv,deleteBtn)
+    container.append(popUpBox,grayBG)
+}
+function closeDetail(){
+    const popUpBox = document.getElementById('popUpBox')
+    popUpBox.remove()
+    const grayBG = document.getElementById('grayBG')
+    grayBG.remove()
+}
+async function deleteFromPlanner(course){
+    
+    await updateDoc(addcheckerRef,{
+        checker : arrayRemove(`${course.subjectID}` + '-'+`${course.section}`)
+    })
+    
+    const deleteRef = doc(db,'myPlanner',`${course.subjectID}-${course.section}`)
+
+    await deleteDoc(deleteRef)
+    console.log('delete : ' + course.subjectName);
+    updateTable()
+=======
+    popUpBox.append(title,closeBtn,courseID,section,instructorName,classRoom,timeDiv,deleteBtn)
+    container.append(popUpBox,grayBG)
+}
+function closeDetail(){
+    const popUpBox = document.getElementById('popUpBox')
+    popUpBox.remove()
+    const grayBG = document.getElementById('grayBG')
+    grayBG.remove()
+}
+async function deleteFromPlanner(course){
+    // No case in App that able to delete without having it
+    // So, We don't need to check in db before delete it    
+    const deleteRef = doc(db,'myPlanner',`${course.subjectID}-${course.section}`)
+
+    await deleteDoc(deleteRef)
+    console.log('delete : ' + course.subjectName);
+    updateTable()
+>>>>>>> Stashed changes
 }
 */
 // Binding Func with btn
