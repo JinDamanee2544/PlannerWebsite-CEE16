@@ -180,6 +180,12 @@ table th{
 .subjectDivInTable p:first-child{
     font-weight: bold;
 }
+.mainPanel{
+    margin: 0px;
+}
+.mainPanel section{
+    margin: 20px 10px;
+}
 /* --------------------- Edit panel --------------------- */
 .section-editpanel{
     padding : 10px 10px;
@@ -213,6 +219,9 @@ table th{
     justify-content: flex-end;
     width: 270px;
     align-items: center;
+}
+.TimeDetail div{
+    min-width: 560px;
 }
 /*
 .labelZone .inputZone{
@@ -253,16 +262,19 @@ table th{
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     color: #363636;
-    width: 400px; /* For Card Widht */
+    min-width: 400px;
+    width: auto; /* For Card Widht */
 }
 .example{
     padding: 10px;
 }
 .addToPlannerBtn{
+    color:  #FFF;
     background-color: #989898;
     margin: 0px 10px 10px 10px;
 }
 .addToPlannerBtn:hover{
+    transition: 0.5s;
     background-color: #363636;
 }
 .about-project{
@@ -332,23 +344,23 @@ table th{
     padding: 10px;
 }
 /* ---------- Responsive -------------*/
-@media only screen and (max-width: 1000px){
+
+@media only screen and (max-width: 1150px){ /* Collaspe mainPanel */
     .mainPanel{
         display: flex;
         flex-direction: column;
         align-items: center;
     }
-    .subjectInput{
-        display: flex;
-        flex-direction: column;
-        max-width: 600px;
+    .section-searchPanel{
+        width: fit-content
     }
-    .inputZone{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    .TimeDetail div{
+        min-width: 600px;
     }
     .section-searchPanel{
-        width: 620px;
+        min-width: 620px;
+    }
+    .about-project{
+        max-width: 620px;
     }
 }
