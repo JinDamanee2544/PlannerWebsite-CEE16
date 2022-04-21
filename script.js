@@ -37,7 +37,6 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 const subjectRef = collection(db, 'subjects');
 const myPlannerRef = collection(db,'myPlanner');
-const addcheckerRef = doc(db,'checker','planner');
 
 // global
 var selectWeeklyGlobal = 1;
@@ -68,9 +67,9 @@ async function search(){
     }
     var foundref
     if(selectQueryGlobal==0){
-        foundref = query(subjectRef, where('subjectID', '==', `${search}`));
+        foundref = query(subjectRef, where('subjectID', '>=', `${search}`) , where('subjectID', '<=', `${search}`+ '\uf8ff'));
     } else {
-        foundref = query(subjectRef, where('subjectName', '==', `${search}`));
+        foundref = query(subjectRef, where('subjectName', '>=', `${search}`) , where('subjectName', '<=', `${search}`+ '\uf8ff'));
     }
     const queryID = await getDocs(foundref)
     const searchList = [] // array of data array - 2D array
@@ -185,7 +184,7 @@ function queryChoice(){
         queryDiv.append(nameLabel,inputName)
     } 
 }
-function addItem(){
+async function addItem(){
     console.log("Add Item");
 
     // fetch 
@@ -194,6 +193,15 @@ function addItem(){
     const section = document.getElementById('section').value.trim()
     const instructorName = document.getElementById('instructorName').value.trim().toUpperCase()
     const classroom = document.getElementById('classroom').value.trim()
+
+    // check Duplicate
+    const searchRef = doc(db,'subjects',`${subjectID}-${section}`)
+    const searchSnap = await getDoc(searchRef)
+    if(searchSnap.data()){
+        console.log("This subject already in database");
+        alert("This subject already in database");
+    }
+
     
     const timeMap = {}
     for (let index = 1; index <= selectWeeklyGlobal; index++) {
@@ -220,41 +228,8 @@ function addItem(){
         alert("Please fill all content below before submit your data")
         console.log("Fail");
     }
+    
 }
-/*
-function tableGenerator(){
-    const tableContainer = document.getElementById('tableTest')
-    const table = document.createElement('table')
-    // ----------- head --------------// 
-    const headRow = document.createElement('tr')
-    const headDayTime = document.createElement('th')
-    headDayTime.innerHTML = 'Day/Time'
-    headRow.appendChild(headDayTime)
-    for(let idx=8;idx<=16;idx++){
-        const headCol = document.createElement('th')
-        headCol.id = 'headCol'+idx
-        headCol.innerHTML = idx
-        headRow.appendChild(headCol)
-    }
-    table.append(headRow)
-    // ----------- content row --------------// 
-    const day = ['MON','TUE','WED','THU','FRI']
-    for(let idx=0;idx<5;idx++){
-        const contentRow = document.createElement('tr')
-        var thisDay = day[idx]
-        const dayCol = document.createElement('td')
-        dayCol.innerHTML = thisDay
-        contentRow.appendChild(dayCol)
-        table.appendChild(contentRow)
-        for(let idx=0;idx<9;idx++){
-            const contentCol = document.createElement('td')
-            contentCol.innerHTML=''
-            contentRow.appendChild(contentCol)
-        }
-    }
-    tableContainer.appendChild(table)
-}
-*/
 function myTableGenerator(){
     const tableContainer = document.getElementById('myTable')
     tableContainer.innerHTML = ''
@@ -286,47 +261,39 @@ function myTableGenerator(){
     tableContainer.appendChild(table)
 
 }
-async function addToPlanner(subjectData){
+async function addToPlanner(course){
     // checking Duplicate
-    const checkerSnap = await getDoc(addcheckerRef)
-    const checker = checkerSnap.data().checker
-    if(checker){
-        const checkSubject = subjectData.subjectID + '-' + subjectData.section
-        //console.log(checkSubject);
-        if(checker.includes(checkSubject)){
-            alert("It's already in Planner")
-            console.log("It's already in Planner");
-            return;
-        }
+    const searchInplannerRef = doc(db,'myPlanner',`${course.subjectID}-${course.section}`)
+    const searchSnap = await getDoc(searchInplannerRef)
+    if(searchSnap.data()){
+        console.log();("This subject already in planner")
+        alert("This subject already in planner")
     }
+    
     // checking time overlap
-    const checkOverLap = await overlapping(subjectData)
+    const checkOverLap = await overlapping(course)
     //console.log(checkOverLap);
     if(checkOverLap){
         alert('Your selected course has overlapped with another course in planner')
         console.log('Your selected course has overlapped with another course in planner');
         return;
     }
-
-    // Update Duplicate Checker
-    await updateDoc(addcheckerRef,{
-        checker : arrayUnion(`${subjectData.subjectID}` + '-'+`${subjectData.section}`)
-    })
     
     subjectInplanner++;
-    subjectInplannerSet.add(`${subjectData.subjectID}+'-'+${subjectData.section}`)
+    subjectInplannerSet.add(`${course.subjectID}+'-'+${course.section}`)
     
-    const locationRef = doc(db,'myPlanner',`${subjectData.subjectID}-${subjectData.section}`)
+    const locationRef = doc(db,'myPlanner',`${course.subjectID}-${course.section}`)
     setDoc(locationRef,{
-        subjectID : subjectData.subjectID,
-        subjectName : subjectData.subjectName,
-        section : subjectData.section,
-        instructorName : subjectData.instructorName,
-        classroom : subjectData.classroom,
-        timeMap : subjectData.timeMap
+        subjectID : course.subjectID,
+        subjectName : course.subjectName,
+        section : course.section,
+        instructorName : course.instructorName,
+        classroom : course.classroom,
+        timeMap : course.timeMap
     })
     
     updateTable();
+    
 }
 async function overlapping(course){
     // fetch database and sort
@@ -481,10 +448,6 @@ function closeDetail(){
     grayBG.remove()
 }
 async function deleteFromPlanner(course){
-    
-    await updateDoc(addcheckerRef,{
-        checker : arrayRemove(`${course.subjectID}` + '-'+`${course.section}`)
-    })
     
     const deleteRef = doc(db,'myPlanner',`${course.subjectID}-${course.section}`)
 
