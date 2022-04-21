@@ -29,7 +29,7 @@ nav {
 nav .navbar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     height: 100%;
     width: 70%;
     margin: auto; 
@@ -61,8 +61,11 @@ nav .navbar .menu {
     align-items: center;
 }
 .navbar .menu li {
+    display: flex;
     list-style: none;
     margin: 0 25px;
+    text-align: center;
+    align-items: center;
 }
 .navbar .menu li a{
     text-decoration: none;
@@ -91,7 +94,7 @@ section{
     display: flex;
     flex-direction: row;
     border-radius: 10px;
-    margin: 10px 10px;
+    margin: 0px;
     padding: 10px 10px;
     justify-content: center;
 }
@@ -289,6 +292,14 @@ table th{
     background: #fff;
     border-radius: 10px;
 }
+.displaySearch{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.displaySearch button{
+    font-size: 14px;
+}
 /* ------------- Pop Up ------------- */ 
 .grayBG{
     z-index: 100;
@@ -364,7 +375,7 @@ table th{
         min-width: 620px;
     }
     .about-project{
-        max-width: 620px;
+        width: 620px;
     }
 }
 /* ---------- Toprint -------------*/

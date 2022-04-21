@@ -455,12 +455,24 @@ async function deleteFromPlanner(course){
     console.log('delete : ' + course.subjectName);
     updateTable()
 }
+function clearSearch(){
+    const searchBox = document.getElementById('searchList')
+    searchBox.innerHTML = '' // clear
+    const exampleSearchDiv = document.createElement('div')
+    exampleSearchDiv.className = 'searchCard example'
+    const waitingText = document.createElement('p')
+    waitingText.innerHTML = 'Waiting For Input...'
+    exampleSearchDiv.appendChild(waitingText)
+    searchBox.appendChild(exampleSearchDiv)
+
+}
 // Binding Func with btn
 document.getElementById('test').addEventListener('click',checkDataBase)
 document.getElementById('selectWeekly').addEventListener('change',timeAdd)
 document.getElementById('selectQuery').addEventListener('change',queryChoice)
 document.getElementById('addItemBtn').addEventListener('click',addItem)
 document.getElementById('searchBtn').addEventListener('click',search)
+document.getElementById('displaySearchBtn').addEventListener('click',clearSearch)
 // Starting Func when starting up website
 timeAdd()
 queryChoice()
