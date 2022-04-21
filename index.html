@@ -27,10 +27,10 @@
         <section class="section-table" id="myTable">
             <!--Auto generate table in JS-->
         </section>
-        <section>
+        <section class="mainPanel">
             <section class="section-editpanel" id="editpanel">
                 <div class="subHeader"> Edit - Panel (BETA) </div>
-                <div class="content">
+                <div class="contentPanel">
                     <p>For inserting new subject into data base </p>
     
                     <label>Subject Name</label>
@@ -49,7 +49,7 @@
                     <input id="classroom" type="text">
                     <hr>
                 </div>
-                <div class="content">
+                <div class="contentPanel">
                     <p>Time detail</p>
                     <label>number of course in each week : </label>
                     <select id="selectWeekly">
@@ -68,7 +68,7 @@
             </section>
             <section class="section-searchPanel" id="search">
                 <div class="subHeader"> Search - Panel (BETA) </div>
-                <div class="content">
+                <div class="contentPanel">
                     <p>For Adding Subject in Planner </p>
                     <label>Query By : </label>
                     <select id="selectQuery">
@@ -78,10 +78,10 @@
                     <div id="queryChoice">
                         <!--Auto generate In JS-->
                     </div>
-                    <div class="searchbtn"><button id="searchBtn">Search</button></div>
                 </div>
+                <button id="searchBtn">Search</button>
                 <hr>
-                <div class="content">
+                <div class="contentPanel">
                     <p> Displaying What you search </p>
                     <div id="searchList">
                         <div class="searchCard example">
@@ -125,7 +125,6 @@
                     <hr>
                     <p style="text-align: center;">[The written report can be downloaded here!]</p>
                     <div class="downloadbtn"><button id="download">Download</button></div>
-                </div>
                 </div>
             </div>
         </section>

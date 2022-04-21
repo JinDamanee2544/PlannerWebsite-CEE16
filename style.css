@@ -34,10 +34,7 @@ nav .navbar {
     width: 70%;
     margin: auto; 
 }
-nav .navbar .menu li a:hover{
-    /* background:#fff; */
-    color:#E4B2C1;
-}
+
 nav .navbar .name a{
     /* display: inline; */
     text-decoration: none;
@@ -59,14 +56,23 @@ nav .navbar .name a{
 nav .navbar .menu {
     display: flex;
 }
+.navbar .name ul {
+    display: flex;
+    align-items: center;
+}
 .navbar .menu li {
     list-style: none;
     margin: 0 25px;
 }
 .navbar .menu li a{
     text-decoration: none;
-    font-size: 1vw;
+    font-size: auto;
     color: #fff;
+    text-align: center;
+}
+nav .navbar .menu li a:hover{
+    /* background:#fff; */
+    color:#E4B2C1;
 }
 footer{
     background-color: #1bb270;
@@ -115,14 +121,18 @@ hr{
     align-items: center;
     text-align: center;
     background-color: #1bb270;
-    color : #fff;
+    color: #fff;
     padding: 10px 10px;
     font-size: 24px;
+    border-top-left-radius:10px ;
+    border-top-right-radius:10px ;
 }
-.content{
+.contentPanel{
     margin: 10px 10px;
 }
 .container{
+    display: flex;
+    flex-direction: column;
     top: 0; bottom: 0;
     width: 100%;
     height: 100%;
@@ -200,7 +210,7 @@ table th{
     width: fit-content;
     background-color: #FFF;
 }
-.section-searchPanel .content .searchbtn{   
+.section-searchPanel .content{   
     text-align: center;
 }
 .searchCard{
@@ -297,4 +307,15 @@ table th{
 }
 .about-project .content .downloadbtn {
     text-align: center;
+}
+.content{
+    padding: 10px;
+}
+/* ---------- Responsive -------------*/
+@media only screen and (max-width: 1000px){
+    .mainPanel{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
