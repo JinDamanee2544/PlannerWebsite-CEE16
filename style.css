@@ -98,16 +98,18 @@ button{
     border: none;
     padding: 10px;
     border-radius: 5px;
-    background-color: #1bb270;
-    color: #FFF;
+    background-color: #FBD6D2;
+    color: #B8405E;
+    font-family: 'Mitr', sans-serif;
 }
 button:hover{
-    background-color: #0d9b5d;
+    background-color: #FFA0A0;
     transition: 0.3s;
 }
 hr{
     margin: 10px 0px;
 }
+
 .subHeader{
     display: flex;
     align-items: center;
@@ -121,6 +123,7 @@ hr{
     margin: 10px 10px;
 }
 .container{
+    top: 0; bottom: 0;
     width: 100%;
     height: 100%;
     /* background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%); */
@@ -197,6 +200,9 @@ table th{
     width: fit-content;
     background-color: #FFF;
 }
+.section-searchPanel .content .searchbtn{   
+    text-align: center;
+}
 .searchCard{
     display: flex;
     flex-direction: column;
@@ -258,7 +264,7 @@ table th{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #FFF;
+    background-color: #FFF6EA;
     display: flex;
     padding: 20px;
     border-radius: 10px;
@@ -270,7 +276,7 @@ table th{
     top: 20px;
     right: 20px;
     height: fit-content;
-    background-color: #ff0000;
+    background-color: #F68989;
     color: #FFF;
     margin: 0px;
 }
@@ -279,13 +285,16 @@ table th{
     transition: 0.5s;
 }
 .deleteBtn{
-    background-color: #ff0000;
+    background-color:#fff;
 }
 .deleteBtn:hover{
-    background-color: #cc0303;
+    background-color: #FBD6D2;
 }
 /* ------------- About ------------- */ 
 .about-project li {
     text-align: center;
     list-style: none;
+}
+.about-project .content .downloadbtn {
+    text-align: center;
 }
