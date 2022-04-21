@@ -202,6 +202,26 @@ table th{
     font-size: 30px;
     font-weight: bolder;
 }
+.subjectInput{
+    display: flex;
+    flex-wrap: wrap;
+    width: fit-content;
+    max-width: 600px;
+}
+.subjectInput li{
+    display: flex;
+    justify-content: flex-end;
+    width: 270px;
+    align-items: center;
+}
+/*
+.labelZone .inputZone{
+    
+}
+.labelZone::after .inputZone::after{
+    
+}
+*/
 /* -------------- Search Panel --------------- */
 .section-searchPanel{   
     display: flex;
@@ -317,5 +337,12 @@ table th{
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+    .subjectInput{
+        max-width: 600px;
+        justify-content: center;
+    }
+    .section-searchPanel{
+        width: 620px;
     }
 }
