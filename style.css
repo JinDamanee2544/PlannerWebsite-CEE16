@@ -358,9 +358,7 @@ table th{
     text-align: center;
     list-style: none;
 }
-.about-project .content .downloadbtn {
-    text-align: center;
-}
+
 .content{
     padding: 10px;
 }
@@ -414,4 +412,18 @@ table th{
     #myTable * {
         visibility: visible;
     } 
+}
+/* ---------- Download button -------------*/
+.about-project .content .downloadbtn {
+    text-align: center;
+}
+.about-project .content .downloadbtn a{
+    text-decoration: none;
+    color: #B8405E;
+}
+.downloadbtn li{
+    display: inline;
+    list-style: none;
+    margin: 0%;
+    vertical-align: middle;
 }
