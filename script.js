@@ -404,7 +404,7 @@ function openDetail(course){
     grayBG.id = 'grayBG'
 
     const closeBtn = document.createElement('button')
-    closeBtn.innerHTML = 'Close'
+    closeBtn.innerHTML = 'X'
     closeBtn.className = 'closeBtn'
     closeBtn.addEventListener('click',closeDetail)
 

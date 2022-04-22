@@ -103,11 +103,12 @@ input{
     border-radius: 5px;
 }
 button{
+    height: fit-content;
     margin: 10px 0%;
     font-size: larger;
     border: 1px solid;
-    box-shadow: 5px 4px 2px #888888;
-    padding: 10px;
+    box-shadow: 5px 4px 2px rgba(0, 0, 0, 10%);
+    padding: 5px;
     border-radius: 5px;
     background-color: #FBD6D2;
     color: #B8405E;
@@ -120,7 +121,6 @@ button:hover{
 hr{
     margin: 10px 0px;
 }
-
 .subHeader{
     display: flex;
     align-items: center;
@@ -330,9 +330,11 @@ table th{
 }
 .closeBtn{
     position: absolute;
+    width: 40px;
     top: 20px;
     right: 20px;
     height: fit-content;
+    border: inherit;
     background-color: #F68989;
     color: #FFF;
     margin: 0px;
@@ -341,12 +343,14 @@ table th{
     background-color: #cc0303;
     transition: 0.5s;
 }
+/*
 .deleteBtn{
     background-color:#fff;
 }
 .deleteBtn:hover{
     background-color: #FBD6D2;
 }
+*/
 .timePopUp{
     display: flex;
     justify-content: space-around;
