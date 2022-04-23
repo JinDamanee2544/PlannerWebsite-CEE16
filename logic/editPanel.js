@@ -24,16 +24,27 @@ export function timeAdd(){
         timeStart.innerHTML = 'timeStart'
         const timeEnd = document.createElement('label');
         timeEnd.innerHTML = 'timeEnd'
-        const dayInput = document.createElement('input');
+
+        const daySelect = document.createElement('select')
+        
+        const dayList = ['MON','TUE','WED','THU','FRI']
+        dayList.forEach(day=>{
+            const dayOption = document.createElement('option')
+            dayOption.innerHTML = `${day}`
+            dayOption.value = `${day}`
+            dayOption.id = `option-${day}`
+            daySelect.appendChild(dayOption)
+        })
+
         const startInput = document.createElement('input');
         const endInput = document.createElement('input');
 
         // binding ID
-        dayInput.id = 'dayInput' +  index
+        daySelect.id = 'selectDay' + index
         startInput.id = 'startInput' +  index
         endInput.id = 'endInput' +  index
 
-        eachInfo.append(order,day,dayInput,timeStart,startInput,timeEnd,endInput)
+        eachInfo.append(order,day,daySelect,timeStart,startInput,timeEnd,endInput)
         timeDiv.appendChild(eachInfo)
     }
 }
@@ -54,10 +65,11 @@ export async function addItem(){
         alert("This subject already in database");
         return;
     }
-    
     const timeMap = {}
     for (let index = 1; index <= selectWeeklyGlobal; index++) {
-        var dayInput = document.getElementById(`dayInput${index}`).value
+        var daySelect = document.getElementById(`selectDay${index}`)
+        var dayInput = daySelect.options[daySelect.selectedIndex].value
+
         var startInput = document.getElementById(`startInput${index}`).value
         var endInput = document.getElementById(`endInput${index}`).value
 
