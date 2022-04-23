@@ -302,6 +302,10 @@ table th{
 .displaySearch button{
     font-size: 14px;
 }
+.searchList{
+    max-height: 500px;
+    overflow-y: auto;
+}
 /* ------------- Pop Up ------------- */ 
 .grayBG{
     z-index: 100;
