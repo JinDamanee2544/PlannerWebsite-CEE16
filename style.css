@@ -113,6 +113,10 @@ button{
     background-color: #FBD6D2;
     color: #B8405E;
     font-family: 'Mitr', sans-serif;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
 }
 button:hover{
     background-color: #FFA0A0;
@@ -121,16 +125,38 @@ button:hover{
 hr{
     margin: 10px 0px;
 }
-.subHeader{
+.subHeader {
+    min-width: 620px;
     display: flex;
     align-items: center;
-    text-align: center;
+    justify-content: space-between;
     background-color: #1bb270;
-    color: #fff;
     padding: 10px 10px;
-    font-size: 24px;
     border-top-left-radius:10px ;
     border-top-right-radius:10px ;
+}
+.collaspe{
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.subHeader p{
+    text-align: center;
+    font-weight: bold !important;
+    font-size: 24px !important; 
+    color: #fff;
+}
+.subHeader button{
+    background-color: #FFF ;
+    color: #33d38e;
+    width: 50px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 10%);
+}
+.subHeader button:hover{
+    transition: 0.5s;
+    background-color: #188d5a ;
+    color: #FFF;
 }
 .contentPanel{
     margin: 10px 10px;
@@ -148,6 +174,10 @@ hr{
     background-position: center;
     background-size:cover;
 }
+.colllaspeExpandBtn{
+    display: none;
+}
+
 /* --------------------- Table --------------------- */
 .section-table{
     padding-top: 120px;
@@ -189,9 +219,7 @@ table th{
     margin: 0px;
 }
 .mainPanel section{
-    margin-top: 0px;
-    margin-bottom: 20px;
-    margin-left: 10px; margin-right: 10px;
+    margin: 10px;
 }
 /* --------------------- Edit panel --------------------- */
 .section-editpanel{
@@ -230,14 +258,6 @@ table th{
 .TimeDetail div{
     min-width: 560px;
 }
-/*
-.labelZone .inputZone{
-    
-}
-.labelZone::after .inputZone::after{
-    
-}
-*/
 /* -------------- Search Panel --------------- */
 .section-searchPanel{   
     display: flex;
@@ -457,12 +477,9 @@ table th{
 .successBox{
     background-color: #4ec37d;
 }
-
-
-
 /* ---------- Responsive -------------*/
 
-@media only screen and (max-width: 1150px){ /* Collaspe mainPanel */
+@media only screen and (max-width: 1150px){ /* Phone */
     .mainPanel{
         display: flex;
         flex-direction: column;
@@ -478,6 +495,9 @@ table th{
         min-width: 620px;
     }
     .about-project{
-        width: 620px;
+        width: fit-content;
+    }
+    .colllaspeExpandBtn{
+        display: initial;
     }
 }
