@@ -370,27 +370,7 @@ table th{
 .content{
     padding: 10px;
 }
-/* ---------- Responsive -------------*/
 
-@media only screen and (max-width: 1150px){ /* Collaspe mainPanel */
-    .mainPanel{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .section-searchPanel{
-        width: fit-content
-    }
-    .TimeDetail div{
-        min-width: 600px;
-    }
-    .section-searchPanel{
-        min-width: 620px;
-    }
-    .about-project{
-        width: 620px;
-    }
-}
 /* ---------- Toprint -------------*/
 .toprint{
     padding: 10px 10px;
@@ -434,4 +414,70 @@ table th{
     list-style: none;
     margin: 0%;
     vertical-align: middle;
+}
+/* ---------- AlertBox ---------------*/
+@keyframes fade {
+    0%{ 
+        right : -100%;
+        opacity: 100%; 
+    }
+    30%{
+        right: 0%;
+        opacity: 100%; 
+    }
+    70%{
+        opacity: 100%; 
+    }
+    100%{
+        opacity: 0%;
+    }
+}
+.alertBox,.successBox{
+    z-index: 200;
+    position: fixed;
+    width: fit-content;
+    height: 30px;
+    top: 150px;
+    right: 0%;
+    opacity: 0%; 
+    overflow: hidden;
+    font-size: 12px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: #ff4646;
+    color: #FFF;
+    padding: 20px;
+
+    display: flex;
+    
+    animation-name: fade;
+    animation-duration: 3s;
+    animation-iteration-count : 1
+}
+.successBox{
+    background-color: #4ec37d;
+}
+
+
+
+/* ---------- Responsive -------------*/
+
+@media only screen and (max-width: 1150px){ /* Collaspe mainPanel */
+    .mainPanel{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .section-searchPanel{
+        width: fit-content
+    }
+    .TimeDetail div{
+        min-width: 600px;
+    }
+    .section-searchPanel{
+        min-width: 620px;
+    }
+    .about-project{
+        width: 620px;
+    }
 }

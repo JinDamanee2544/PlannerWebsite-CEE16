@@ -2,7 +2,6 @@ import {updateTable,myTableGenerator} from '../logic/table.js'
 import {clearSearch,search,queryChoice} from '../logic/searchPanel.js'
 import {timeAdd,addItem} from '../logic/editPanel.js'
 
-
 // Binding Func with btn
 document.getElementById('selectWeekly').addEventListener('change',timeAdd)
 document.getElementById('selectQuery').addEventListener('change',queryChoice)
@@ -14,3 +13,7 @@ timeAdd()
 queryChoice()
 myTableGenerator()
 updateTable()
+/*
+alertDisplay("This subject already plan in another section")
+successDisplay("TEST")
+*/

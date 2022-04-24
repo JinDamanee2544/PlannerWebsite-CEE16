@@ -18,6 +18,7 @@ import {
     query,
     setDoc,
 } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js';
+import { successDisplay } from "./alertBox.js";
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
@@ -39,7 +40,7 @@ export async function loadAllPlanner(){
 export async function deleteFromPlanner(course){
     const deleteRef = doc(db,'myPlanner',`${course.subjectID}-${course.section}`)
     await deleteDoc(deleteRef)
-    console.log('delete : ' + course.subjectName);
+    successDisplay('Delete : ' + course.subjectName)
 }
 export async function addToPlannerDB(course){
     const locationRef = doc(db,'myPlanner',`${course.subjectID}-${course.section}`)
@@ -51,7 +52,7 @@ export async function addToPlannerDB(course){
         classroom : course.classroom,
         timeMap : course.timeMap
     })
-    console.log("Add successfully");
+    successDisplay("Add In Planner successfully")
 }
 export async function quearySameCoursePlanner(course){
     const searchID = `${course.subjectID}`
@@ -87,5 +88,5 @@ export async function addInDatabase(course){
         subjectName : course.subjectName,
         timeMap : course.timeMap
     })
-    console.log("Add successfully");
+    successDisplay("Add In Database successfully")
 }

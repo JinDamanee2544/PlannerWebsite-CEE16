@@ -1,5 +1,6 @@
 import { addToPlanner } from "../logic/table.js";
 import { searchByID,searchByName } from "../logic/database.js";
+import { alertDisplay } from "./alertBox.js";
 var selectQueryGlobal = 0; // 0:ID 1:Name
 
 export function clearSearch(){
@@ -27,7 +28,7 @@ export async function search(){
         }))
         if(queryMap.length==0) {
             console.log('Not found');
-            alert('Not found')
+            alertDisplay('Not found')
             return;
         } else {
             searchList.push(queryMap)

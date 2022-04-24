@@ -1,4 +1,5 @@
 import { searchInDB,addInDatabase } from "../logic/database.js";
+import { alertDisplay } from "./alertBox.js";
 
 var selectWeeklyGlobal = 1;
 
@@ -61,8 +62,7 @@ export async function addItem(){
     // check Duplicate
     const searchDoc = await searchInDB(subjectID,section)
     if(searchDoc.data()){
-        console.log("This subject already in database");
-        alert("This subject already in database");
+        alertDisplay("This subject already in database")
         return;
     }
     const timeMap = {}
@@ -81,10 +81,8 @@ export async function addItem(){
         const course = {
             classroom,instructorName,section,subjectID,subjectName,timeMap
         }
-        console.log(course);
         addInDatabase(course)
     } else {
-        alert("Please fill all content below before submit your data")
-        console.log("Fail");
+        alertDisplay("Please fill all content below before submit your data")
     }
 }
