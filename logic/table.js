@@ -60,7 +60,7 @@ async function checkSection(course){
     const checkMap = checkDoc.docs.map((item) => ({
         ...item.data(),
     }));
-    console.log(checkMap);
+    //console.log(checkMap);
     if(checkMap.length==0) {
         return false
     } else {
