@@ -20,11 +20,11 @@ export function timeAdd(){
         const order = document.createElement('span')
         order.innerHTML = index + " : "
         const day = document.createElement('label');
-        day.innerHTML = 'day'
+        day.innerHTML = 'Day'
         const timeStart = document.createElement('label');
-        timeStart.innerHTML = 'timeStart'
+        timeStart.innerHTML = 'Time-Start'
         const timeEnd = document.createElement('label');
-        timeEnd.innerHTML = 'timeEnd'
+        timeEnd.innerHTML = 'Time-End'
 
         const daySelect = document.createElement('select')
         

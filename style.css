@@ -123,7 +123,8 @@ button{
     -o-border-radius: 5px;
 }
 button:hover{
-    background-color: #FFA0A0;
+    background-color: #f47e7e;
+    color: #fff;
     transition: 0.3s;
 }
 hr{
@@ -178,7 +179,10 @@ hr{
 .colllaspeExpandBtn{
     display: none;
 }
-
+label{
+    padding-left: 5px;
+    padding-right: 5px;
+}
 /* --------------------- Table --------------------- */
 .section-table{
     padding-top: 120px;
@@ -299,6 +303,7 @@ table th{
 .addToPlannerBtn{
     color:  #FFF;
     background-color: #989898;
+    border: none;
     margin: 0px 10px 10px 10px;
 }
 .addToPlannerBtn:hover{
@@ -359,7 +364,7 @@ table th{
     top: 20px;
     right: 20px;
     height: fit-content;
-    border: inherit;
+    border: none;
     background-color: #F68989;
     color: #FFF;
     margin: 0px;
@@ -368,14 +373,16 @@ table th{
     background-color: #cc0303;
     transition: 0.5s;
 }
-/*
+
 .deleteBtn{
-    background-color:#fff;
+    background-color:#F68989;
+    color: #FFF;
+    border: none;
 }
 .deleteBtn:hover{
-    background-color: #FBD6D2;
+    background-color: #cc0303;
 }
-*/
+
 .timePopUp{
     display: flex;
     justify-content: space-around;
@@ -429,6 +436,9 @@ table th{
 .about-project .content .downloadbtn a{
     text-decoration: none;
     color: #B8405E;
+}
+.about-project a:hover{
+    color: #FFF !important;
 }
 .downloadbtn li{
     display: inline;
