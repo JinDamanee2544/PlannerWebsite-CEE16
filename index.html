@@ -37,8 +37,11 @@
         </section>
         <section class="mainPanel" id="mainPanel">
             <section class="section-editpanel" id="editpanel">
-                <div class="subHeader"> Edit - Panel (BETA) </div>
-                <div class="contentPanel">
+                <div class="subHeader" id="subHeaderDivEdit"> 
+                    <p> Edit - Panel</p>
+                    <button id="collaspeBtnEdit" class="colllaspeExpandBtn"> - </button>
+                </div>
+                <div class="contentPanel" id="inputDivEdit">
                     <p>For inserting new subject into data base </p>
                     <ul class="subjectInput">
                         <li>
@@ -63,8 +66,8 @@
                         </li>
                     </ul>
                 </div>
-                <hr>
-                <div class="contentPanel TimeDetail">
+                <hr id="hrEdit">
+                <div class="contentPanel TimeDetail" id="timeDetailDivEdit">
                     <p>Time detail</p>
                     <label>number of course in each week : </label>
                     <select id="selectWeekly">
@@ -81,8 +84,11 @@
                 <button id="addItemBtn">AddItem</button>
             </section>
             <section class="section-searchPanel" id="search">
-                <div class="subHeader"> Search - Panel (BETA) </div>
-                <div class="contentPanel">
+                <div class="subHeader" id="subHeaderDivSearch">
+                    <p> Search - Panel  </p>
+                    <button id="collaspeBtnSearch" class="colllaspeExpandBtn"> - </button>
+                </div>
+                <div class="contentPanel" id="queryDivSearch">
                     <p>For Adding Subject in Planner </p>
                     <label>Query By : </label>
                     <select id="selectQuery">
@@ -94,8 +100,8 @@
                     </div>
                 </div>
                 <button id="searchBtn">Search</button>
-                <hr>
-                <div class="contentPanel">
+                <hr id="hrSearch">
+                <div class="contentPanel" id="listSearchDiv">
                     <div class="displaySearch">
                         <p> Displaying What you search </p>
                         <button id="displaySearchBtn">Clear</button>
@@ -105,32 +111,17 @@
                             <p style="text-align: center;">Waiting For Input... </p>
                         </div>
                         <!-- Auto list in JS-->
-                        <!--
-                            <div class="searchCard">
-                            <div class="searchCard-title">
-                                <h1>2110327 - Algorithm Design</h1>
-                                <h1>Sec1</h1>
-                            </div>
-                            <div class="searchCard-content">
-                                <p>instructor Name : NNN</p>
-                                <p>Time : 9:30 - 11:30 </p>
-                                <p>For Design Card</p>
-                                <p>in JS will be do like this</p>
-                            </div>
-                            </div>
-                            For Design If anyone want to change it
-                            Then inform me to turn it to JS or maybe 
-                            you can change it on your own ^^
-                        -->
-                        
                     </div>
                 </div>
             </section>
         </section>
         <section>
             <div class="about-project" id="about">
-                <div class="subHeader">About COURSE PLANNER</div>
-                <div class="content">
+                <div class="subHeader" id="subHeaderDivAbout">
+                    <p> About COURSE PLANNER </p>
+                    <button id="collaspeBtnAbout" class="colllaspeExpandBtn"> - </button>
+                </div>
+                <div class="content" id="contentAbout">
                     <p>[This project is a part of 2021/2 -- 2110221 Computer Engineering Essentials]</p>
                     <h2 style="text-align:center">Members</h2>
                     <ul>
@@ -147,7 +138,6 @@
                             <li><button id="download"><a href="images/example.pdf" download>Download</a></button></li>
                         </ul>
                     </div>
-                    
                 </div>
             </div>
         </section>
