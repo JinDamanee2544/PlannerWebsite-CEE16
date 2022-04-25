@@ -62,7 +62,7 @@ export async function addItem(){
     // check Duplicate
     const searchDoc = await searchInDB(subjectID,section)
     if(searchDoc.data()){
-        alertDisplay("This subject already in database")
+        alertDisplay("This subject is already in database")
         return;
     }
     const timeMap = {}

@@ -88,5 +88,5 @@ export async function addInDatabase(course){
         subjectName : course.subjectName,
         timeMap : course.timeMap
     })
-    successDisplay("Add In Database successfully")
+    successDisplay("Successfully added to database")
 }
