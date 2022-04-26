@@ -490,7 +490,7 @@ table th{
 }
 /* ---------- Responsive -------------*/
 
-@media only screen and (max-width: 1150px){ /* Phone */
+@media only screen and (max-width: 1380px){ /* Phone */
     .mainPanel{
         display: flex;
         flex-direction: column;
