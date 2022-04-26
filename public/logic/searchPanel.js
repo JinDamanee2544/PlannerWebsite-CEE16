@@ -1,5 +1,5 @@
-import { addToPlanner } from "../logic/table.js";
-import { searchByID,searchByName } from "../logic/database.js";
+import { addToPlanner } from "./table.js";
+import { searchByID,searchByName } from "./database.js";
 import { alertDisplay } from "./alertBox.js";
 var selectQueryGlobal = 0; // 0:ID 1:Name
 

@@ -1,4 +1,4 @@
-import { searchInDB,addInDatabase } from "../logic/database.js";
+import { searchInDB,addInDatabase } from "./database.js";
 import { alertDisplay } from "./alertBox.js";
 
 var selectWeeklyGlobal = 1;

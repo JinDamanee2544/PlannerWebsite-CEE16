@@ -1,7 +1,7 @@
-import {updateTable,myTableGenerator} from '../logic/table.js'
-import {clearSearch,search,queryChoice} from '../logic/searchPanel.js'
-import {timeAdd,addItem} from '../logic/editPanel.js'
-import {collaspeAbout, collaspeEdit, collaspeSearch} from '../logic/util.js'
+import {updateTable,myTableGenerator} from './table.js'
+import {clearSearch,search,queryChoice} from './searchPanel.js'
+import {timeAdd,addItem} from './editPanel.js'
+import {collaspeAbout, collaspeEdit, collaspeSearch} from './util.js'
 // Binding Func with btn
 document.getElementById('selectWeekly').addEventListener('change',timeAdd)
 document.getElementById('selectQuery').addEventListener('change',queryChoice)

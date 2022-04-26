@@ -1,6 +1,6 @@
 import {loadAllPlanner,loadCoursePlanner,deleteFromPlanner,addToPlannerDB,quearySameCoursePlanner} from '../logic/database.js'
 import { alertDisplay } from './alertBox.js';
-import { openDetail } from '../popUpBox.js';
+import { openDetail } from './popUpBox.js';
 var subjectInplanner = 0;
 
 // ----------------- LOCAL FUNC ---------------------//
