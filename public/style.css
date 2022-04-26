@@ -1,0 +1,514 @@
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;400;600&display=swap');
+
+/* --------------------- Global --------------------- */
+*{
+    margin: 0;
+    padding : 0;
+}
+html{
+    position: relative;
+    min-height: 100%;
+}
+
+body{
+    font-family: 'Mitr', sans-serif;
+    background-color: #fff;
+    display: block;
+    justify-content: center;
+    background-image: url('images/bg2.jpg');
+    background-position: center;
+    background-size:cover;
+}
+
+nav {
+    /* overflow: hidden; */
+    position: fixed;
+    left: 0; right: 0; top: 0;
+    height: 100px;
+    width: 100%;
+    background-color: #1B4D3E; 
+    /* #E4B2C1 */
+    box-shadow:0 3px 15px #363636;
+}
+nav .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+    width: 70%;
+    margin: auto; 
+}
+
+nav .navbar .name a{
+    /* display: inline; */
+    text-decoration: none;
+    color:#fff;
+    font-size: 2vw;
+    font-weight: 800;
+    letter-spacing: 2px;
+    /* justify-content: center; */
+}
+/* nav .navbar .name .course-planner { */
+    /* vertical-align: middle; */
+/* } */
+.navbar .name li {
+    display: inline;
+    list-style: none;
+    margin: 0 5px;
+    vertical-align: middle;
+}
+nav .navbar .menu {
+    display: flex;
+}
+.navbar .name ul {
+    display: flex;
+    align-items: center;
+}
+.navbar .menu li {
+    display: flex;
+    list-style: none;
+    margin: 0 25px;
+    text-align: center;
+    align-items: center;
+}
+.navbar .menu li a{
+    text-decoration: none;
+    font-size: auto;
+    color: #fff;
+    text-align: center;
+}
+nav .navbar .menu li a:hover{
+    /* background:#fff; */
+    color:#E4B2C1;
+}
+footer{
+    background-color: #1bb270;
+    text-align: center;
+    color : #fff;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    padding: 10px 10px;
+}
+header h1,footer h1{
+    font-weight: normal;
+    font-size: 32px;
+}
+section{
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    margin: 0px;
+    padding: 10px 10px;
+    justify-content: center;
+}
+input{
+    width: 100px;
+    border-radius: 5px;
+}
+button{
+    height: fit-content;
+    margin: 10px 0%;
+    font-size: larger;
+    border: 1px solid;
+    box-shadow: 5px 4px 2px rgba(0, 0, 0, 10%);
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #FBD6D2;
+    color: #B8405E;
+    font-family: 'Mitr', sans-serif;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+button:hover{
+    background-color: #f47e7e;
+    color: #fff;
+    transition: 0.3s;
+}
+hr{
+    margin: 10px 0px;
+}
+.subHeader {
+    min-width: 620px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1bb270;
+    padding: 10px 10px;
+    border-top-left-radius:10px ;
+    border-top-right-radius:10px ;
+}
+.collaspe{
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.subHeader p{
+    text-align: center;
+    font-weight: bold !important;
+    font-size: 24px !important; 
+    color: #fff;
+}
+.subHeader button{
+    background-color: #FFF ;
+    color: #33d38e;
+    width: 50px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 10%);
+}
+.subHeader button:hover{
+    transition: 0.5s;
+    background-color: #188d5a ;
+    color: #FFF;
+}
+.contentPanel{
+    margin: 10px 10px;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    top: 0; bottom: 0;
+    width: 100%;
+    height: 100%;
+    /* background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%); */
+    /* background: linear-gradient(to bottom, rgba(217, 231, 255,0.9), rgba(255, 253, 208, 0.7)), */
+    /* url('images/bg.jpg'); */
+}
+.colllaspeExpandBtn{
+    display: none;
+}
+label{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+/* --------------------- Table --------------------- */
+.section-table{
+    padding-top: 120px;
+    display: flex;
+}
+.headDay{
+    width: 100px;
+}
+table{
+    width: max-content;
+    background-color: #FFF;
+    width: 80%;
+    border-collapse: collapse;
+    border-radius: 25px;
+}
+table td,th{
+    /* border : solid 1px #bcbcbc;  */
+    padding : 10px 10px;
+    text-align: center;
+}
+table th{
+    background-color:  #1bb270;
+    color: #fff;
+    /* border-color: #000000; */
+}
+.subjectDivInTable{
+    padding: 10px 10px;
+    border-radius: 10px;
+    background-color: #e6e6e6;
+}
+.subjectDivInTable:hover{
+    transition: 0.5s;
+    background-color: #c8c8c8;
+}
+.subjectDivInTable p:first-child{
+    font-weight: bold;
+}
+.mainPanel{
+    margin: 0px;
+}
+.mainPanel section{
+    margin: 10px;
+}
+/* --------------------- Edit panel --------------------- */
+.section-editpanel{
+    padding : 10px 10px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: fit-content;
+    background-color: #FFF;
+}
+.section-editpanel input{
+    background-color: #FFF;
+    margin : 10px 10px;
+}
+.section-editpanel p{
+    font-size: 20px;
+    font-weight: bold;
+}
+.section-editpanel h1{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bolder;
+}
+.subjectInput{
+    display: flex;
+    flex-wrap: wrap;
+    width: fit-content;
+    max-width: 600px;
+}
+.subjectInput li{
+    display: flex;
+    justify-content: flex-end;
+    width: 270px;
+    align-items: center;
+}
+.TimeDetail div{
+    min-width: 560px;
+}
+/* -------------- Search Panel --------------- */
+.section-searchPanel{   
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: fit-content;
+    background-color: #FFF;
+}
+.section-searchPanel .content{   
+    text-align: center;
+}
+.searchCard{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(214, 214, 214);
+    margin: 10px 10px;
+    border-radius: 10px;
+}
+.searchCard-content{
+    width: fit-content;
+    padding : 10px;
+}
+.searchCard-title{
+    display: inline-flex;
+    justify-content : space-between;
+    align-items: center; 
+    background-color: #989898;
+    padding: 10px 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: #363636;
+    min-width: 400px;
+    width: auto; /* For Card Widht */
+}
+.example{
+    padding: 10px;
+}
+.addToPlannerBtn{
+    color:  #FFF;
+    background-color: #989898;
+    border: none;
+    margin: 0px 10px 10px 10px;
+}
+.addToPlannerBtn:hover{
+    transition: 0.5s;
+    background-color: #363636;
+}
+.about-project{
+    padding: 10px 10px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: fit-content;
+    background: #fff;
+    border-radius: 10px;
+}
+.displaySearch{
+    min-width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.displaySearch button{
+    font-size: 14px;
+}
+.searchList{
+    max-height: 500px;
+    overflow-y: auto;
+}
+/* ------------- Pop Up ------------- */ 
+.grayBG{
+    z-index: 100;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #000000;
+    opacity: 50%;
+}
+.popUpBox{
+    z-index: 200;
+    position: fixed;
+    min-width: 450px;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #FFF6EA;
+    display: flex;
+    padding: 20px;
+    border-radius: 10px;
+    flex-direction: column;
+}
+.closeBtn{
+    position: absolute;
+    width: 40px;
+    top: 20px;
+    right: 20px;
+    height: fit-content;
+    border: none;
+    background-color: #F68989;
+    color: #FFF;
+    margin: 0px;
+}
+.closeBtn:hover{
+    background-color: #cc0303;
+    transition: 0.5s;
+}
+
+.deleteBtn{
+    background-color:#F68989;
+    color: #FFF;
+    border: none;
+}
+.deleteBtn:hover{
+    background-color: #cc0303;
+}
+
+.timePopUp{
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    background-color: #FFF;
+}
+/* ------------- About ------------- */ 
+.about-project li {
+    text-align: center;
+    list-style: none;
+}
+
+.content{
+    padding: 10px;
+}
+
+/* ---------- Toprint -------------*/
+.toprint{
+    padding: 10px 10px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: fit-content;
+    border-radius: 10px;
+}
+.toprint .print{
+    border-color: #000000;
+}
+.toprint ul {
+    display: flex;
+    align-items: center;
+}
+.toprint li {
+    display: inline;
+    list-style: none;
+    margin: 0%;
+    vertical-align: middle;
+}
+@media print{
+    body * {
+        visibility: hidden;
+    }
+    #myTable * {
+        visibility: visible;
+    } 
+}
+/* ---------- Download button -------------*/
+.about-project .content .downloadbtn {
+    text-align: center;
+}
+.about-project .content .downloadbtn a{
+    text-decoration: none;
+    color: #B8405E;
+}
+.about-project a:hover{
+    color: #FFF !important;
+}
+.downloadbtn li{
+    display: inline;
+    list-style: none;
+    margin: 0%;
+    vertical-align: middle;
+}
+/* ---------- AlertBox ---------------*/
+@keyframes fade {
+    0%{ 
+        right : -100%;
+        opacity: 100%; 
+    }
+    30%{
+        right: 0%;
+        opacity: 100%; 
+    }
+    70%{
+        opacity: 100%; 
+    }
+    100%{
+        opacity: 0%;
+    }
+}
+.alertBox,.successBox{
+    z-index: 200;
+    position: fixed;
+    width: fit-content;
+    height: 30px;
+    top: 150px;
+    right: 0%;
+    opacity: 0%; 
+    overflow: hidden;
+    font-size: 12px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: #ff4646;
+    color: #FFF;
+    padding: 20px;
+
+    display: flex;
+    
+    animation-name: fade;
+    animation-duration: 3s;
+    animation-iteration-count : 1
+}
+.successBox{
+    background-color: #4ec37d;
+}
+/* ---------- Responsive -------------*/
+
+@media only screen and (max-width: 1380px){ /* Phone */
+    .mainPanel{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .section-searchPanel{
+        width: fit-content
+    }
+    .TimeDetail div{
+        min-width: 600px;
+    }
+    .section-searchPanel{
+        min-width: 620px;
+    }
+    .about-project{
+        width: 640px;
+    }
+    .colllaspeExpandBtn{
+        display: initial;
+    }
+}
