@@ -506,7 +506,7 @@ table th{
         min-width: 620px;
     }
     .about-project{
-        width: fit-content;
+        width: 640px;
     }
     .colllaspeExpandBtn{
         display: initial;
