@@ -1,5 +1,5 @@
-import { updateTable } from "./logic/table.js";
-import { deleteFromPlanner } from "./logic/database.js";
+import { updateTable } from "./table.js";
+import { deleteFromPlanner } from "./database.js";
 
 export function openDetail(course){
     //console.log(course.subjectName);
